@@ -1,21 +1,49 @@
 import React,{Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-//import auth0 from 'auth0-js';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 
+import AuthGaurd from './Hocs/AuthGaurd';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Callback from '../pages/Callback';
 import Auth from '../service/Auth';
 
-const auth = new Auth();
+
+const client = new ApolloClient({
+	uri: "http://172.16.17.247:8080/graphql",
+	request: operation => {
+		operation.setContext({
+		  headers: {
+			authorization: "Bearer " + localStorage.getItem('accessToken') 
+		  }
+		});
+	}
+});
+
+console.log(client);
+//const auth = new Auth();
+
+function onStorage(data) {
+	console.log("hi reload");
+    window.location.reload();
+}
+
+if (window.addEventListener) {
+	window.addEventListener("storage", onStorage, false);
+} else {
+  	window.attachEvent("onstorage", onStorage);
+};
 
 function App() {
   return(
-    <Router>
-      <Route exact path="/" render={(props) => <Home auth={auth} {...props}  />} />
-      <Route exact path="/login" render={(props) => <Login auth={auth} {...props}  />} />
-      <Route exact path="/callback" render={(props) => <Callback auth={auth} {...props}  />} />
-    </Router>
+	<ApolloProvider client={client}>
+		<Router>
+		<Route exact path="/" component={AuthGaurd(Home)}  />
+		<Route exact path="/login" component={AuthGaurd(Login)} />
+		<Route exact path="/callback" component={AuthGaurd(Callback)}/>
+		</Router>
+	</ApolloProvider>
   )
 }
 

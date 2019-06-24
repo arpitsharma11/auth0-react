@@ -4,11 +4,6 @@ import auth0 from 'auth0-js';
 
 class AuthService extends Component {
 
-    accessToken;
-    idToken;
-    expiresAt;
-    authResult;
-
     auth0 = new auth0.WebAuth({
         domain: 'dev-rx0xlk6h.auth0.com',
         clientID: 'AcpBichZZwzS4c7neUWodRoxpwpcfVFv',
@@ -17,11 +12,11 @@ class AuthService extends Component {
     });
 
     getAccessToken = () => {
-        return this.accessToken;
+        return localStorage.getItem('accessToken');
     }
 
     getIdToken = () => {
-        return this.idToken;
+        return localStorage.getItem('idToken');
     }
     
     googleAuth = () => {
@@ -29,29 +24,41 @@ class AuthService extends Component {
             realm: 'Username-Password-Authentication',
             username: 'arpit.sharma@zemosolabs.com',
             password: 'Test_11223',
-            grant_type: 'password'
-            
+            grant_type: 'password',
+            audience: 'http://localhost:8080/graphiql'
         });
     }
 
     setSession = () => {
-        this.auth0.parseHash((err, authResult) => {
-            console.log(authResult);
-            localStorage.setItem('authResult',authResult)
+        this.auth0.parseHash( (err, authResult) =>  {
+            if(err)
+                console.log(err)
+            else {
+                console.log(authResult);
+                window.location.hash = '';
+                //localStorage.setItem('authResult',authResult)
+                localStorage.setItem('accessToken',authResult.accessToken);
+                localStorage.setItem('idToken',authResult.idToken);
+                //this.props.history.push('/')
+                window.location.replace('/')
+            }
         })
+        //this.props.history.push('/')
     }
 
     logout = () => {
-        this.accessToken = null;
-        this.idToken = null;
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('idToken');
+        window.location.replace('/')
     }
 
     isAuthenticated = () => {
-        console.log(this.authResult);
-        if(this.accessToken && this.idToken)
-            return true
+        console.log('accessToken',this.getAccessToken());
+        console.log('idToken',this.getIdToken());
+        if( this.getAccessToken() && this.getIdToken() )
+            return true;
         else
-            return false
+            return false;
     }
 }
 
