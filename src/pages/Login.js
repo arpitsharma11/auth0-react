@@ -25,7 +25,7 @@ class Login extends Component {
 		super(props);
 		this.state = {
 			email: '',
-			password: 'Test_11223'
+			password: ''
 		}
 	}
 
@@ -34,6 +34,16 @@ class Login extends Component {
 			[name]: value
 		});
 		//console.log(this.state);
+	}
+
+	onLoginClick = () => {
+		const { email, password } = this.state;
+		console.log('login');
+		if( email != '' && password != '' )
+			this.props.auth.login(email,password);
+		else{
+			console.log('error');
+		}
 	}
 
 	render() {
@@ -54,7 +64,7 @@ class Login extends Component {
 					<Typography variant="body1" style={{ paddingTop: 31, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
-					<Button onClick={() => auth.login(this.state.email,this.state.password)} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
+					<Button onClick={() => this.onLoginClick()} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
 				</PageTemplate>
 			</MuiThemeProvider>
 		)
