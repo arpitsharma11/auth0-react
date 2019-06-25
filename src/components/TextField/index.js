@@ -46,7 +46,6 @@ const propTypes = {
 
 const TextField = (props) => {
     const handleTextChange = event => {
-        console.log(event.target.value);
         props.onFieldChange(props.name, event.target.value);
     }
     const {
