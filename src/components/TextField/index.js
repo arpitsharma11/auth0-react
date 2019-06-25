@@ -17,7 +17,7 @@ const styles = theme => ({
     label: {
         //add font and color styles
         fontFamily: 'Roboto',
-        fontSize: 11,
+        fontSize: 13,
         color: '#000000',
         opacity: 0.22,
         letterSpacing: '0.48px',

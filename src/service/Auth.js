@@ -19,11 +19,13 @@ class AuthService extends Component {
         return localStorage.getItem('idToken');
     }
     
-    googleAuth = () => {
+    login = (email,password) => {
+       // console.log('email',email);
+        //console.log('password',password);
         this.auth0.login({
             realm: 'Username-Password-Authentication',
-            username: 'arpit.sharma@zemosolabs.com',
-            password: 'Test_11223',
+            username: email,
+            password: password,
             grant_type: 'password',
             audience: 'http://localhost:8080/graphiql'
         });

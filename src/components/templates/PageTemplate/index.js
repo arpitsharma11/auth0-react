@@ -29,10 +29,6 @@ const PageTemplate = (props) => {
 }
 
 PageTemplate.propTypes = {
-    header: PropTypes.node.isRequired,
-    hero: PropTypes.node,
-    sponsor: PropTypes.node,
-    footer: PropTypes.node.isRequired,
     children: PropTypes.any.isRequired,
 }
 

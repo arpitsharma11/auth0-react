@@ -1,19 +1,21 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import MuiButton from '@material-ui/core/Button'
-import PropTypes from 'prop-types';
-import MUITextField from '@material-ui/core/TextField';
+import MuiButton from '@material-ui/core/Button';
 import clsx from 'clsx';
-import { ClassNames } from '@emotion/core';
-import { P } from '@storybook/addon-info/dist/components/markdown';
+
 const styles = theme => ({
     button:
     {
         borderRadius: 6,
+
+    },
+    mediumBtn: {
         height: 31,
-        // color: tjh,
-        fontFamily: "Roboto Medium",
-        letterSpacing: 1.06
+        width: 225
+    },
+    smallBtn: {
+        height: 36,
+        width: 154
     },
     primaryHover: {
         "&:hover": {
@@ -33,6 +35,13 @@ const styles = theme => ({
     },
     secondaryDisabled: {
         backgroundColor: '#E4E4E4'
+    },
+    btnLabel: {
+        textTransform: 'none',
+        fontFamily: "Roboto Medium",
+        letterSpacing: 1.06,
+        fontSize: 15,
+        lineHeight: 0.6
     }
 
 });
@@ -44,27 +53,37 @@ const propTypes = {
 
 };
 
+
+
 const Button = (props) => {
+    const handleClick = () => {
+        alert('clicked!');
+    }
     const {
         classes,
         rootClass,
+        onClick,
         color,
         ...rest
     } = props
-    // const btnSize = props.btnSize === 'large' ? classes.largeBtn : classes.smallBtn
+
     return (
         <MuiButton
             classes={
                 {
                     root: clsx(rootClass, classes.button, color === 'primary' ? classes.primaryHover : classes.secondaryHover),
-                    disabled: color === 'primary' ? classes.primaryDisabled : classes.secondaryDisabled
+                    disabled: color === 'primary' ? classes.primaryDisabled : classes.secondaryDisabled,
+                    sizeLarge: classes.mediumBtn,
+                    sizeSmall: classes.smallBtn,
+                    label: classes.btnLabel
                 }
             }
+            onClick={handleClick}
             color={color}
             {...rest}
         >
-            Sign Up
-</MuiButton>
+            {props.title}
+        </MuiButton>
     );
 };
 
@@ -72,5 +91,3 @@ Button.defaultProps = defaultProps;
 Button.propTypes = propTypes;
 
 export default withStyles(styles, { withTheme: true })(Button);
-
-

@@ -24,13 +24,15 @@ class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			email: '',
+			password: ''
 		}
 	}
 	handleFieldChange = (name, value) => {
-		/*this.setState({
+		this.setState({
 			[name]: value
-		});*/
-		console.log(this.state);
+		});
+		//console.log(this.state);
 	}
 
 	render() {
@@ -47,11 +49,11 @@ class Login extends Component {
 						Please Log In to continue
 					</Typography>
 					<TextField name="email" label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
-					<TextField name="password" label="Password" onFieldChange={this.handleFieldChange} />
+					<TextField name="password" type="password" label="Password" onFieldChange={this.handleFieldChange} />
 					<Typography variant="body1" style={{ paddingTop: 31, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
-					<Button onClick={() => auth.googleAuth()} color='primary' variant='contained' rootClass={classes.button} style={{ width: 225 }} />
+					<Button title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
 				</PageTemplate>
 			</MuiThemeProvider>
 		)

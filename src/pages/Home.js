@@ -11,7 +11,6 @@ class Home extends Component {
             <div>
                 Yo Home!
                 <button onClick={() => this.props.auth.logout()}>Logout</button><br/>
-                <Profile />
             </div>
         )
     }

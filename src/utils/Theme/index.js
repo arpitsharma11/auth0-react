@@ -15,10 +15,11 @@ export default createMuiTheme({
             main: '#FFA400',
             light: '#FFBC44',
             dark: 'rgb(93,175,240,0.2)',
-            hover: '#FFBC44'
+            hover: '#FFBC44',
+            contrastText:'white'
         },
         secondary: {
-            main: '#004987'
+            main: '#004987',
         },
         error: {
             main: '#FF7E7E'
@@ -161,6 +162,9 @@ export default createMuiTheme({
                     backgroundColor: '#F7B500',
                 }
             },
+        },
+        MuiButton: {
+          
         },
         MuiIconButton: {
             root: {
