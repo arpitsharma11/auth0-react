@@ -27,9 +27,13 @@ const styles = theme => ({
         lineHeight: '13px',
         transform: 'none'
     },
-    textField: {
-        width: 343
+    largeTextField: {
+        width: 353
+    },
+    smallTextField: {
+        width: 253
     }
+
 
 });
 
@@ -48,22 +52,27 @@ const TextField = (props) => {
     const {
         autoFocus,
         classes,
-        className: textFieldClass,
+        // className: textFieldClass,
         error,
         onChange,
         label,
         placeholder,
         required,
         type,
+        fullWidth,
         defaultValue,
         maxLength,
+        textFieldClass,
         ...rest
     } = props;
 
     return (
         <MUITextField
             autoFocus={autoFocus}
-            className={clsx(textFieldClass, classes.textField)}
+            classes={{
+                root: clsx(textFieldClass, classes.TextField),
+                // fullWidth: fullWidth ? classes.largeTextField : classes.smallTextField
+            }}
             label={label}
             placeholder={placeholder}
             error={error}
@@ -72,7 +81,6 @@ const TextField = (props) => {
             required={required}
             type={type}
             defaultValue={defaultValue}
-            fullWidth
             InputProps={{
                 className: `${classes.input} `,
             }}

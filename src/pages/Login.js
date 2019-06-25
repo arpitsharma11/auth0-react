@@ -13,11 +13,9 @@ import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
 
-	// button:
-	// {
-	//   marginLeft: 20,
-	//   marginRight: 20
-	// }
+	largeTextField: {
+		width: 353
+	}
 });
 
 class Login extends Component {
@@ -49,12 +47,12 @@ class Login extends Component {
 					<Typography variant="subtitle2" style={{ paddingBottom: 35 }}>
 						Please Log In to continue
 					</Typography>
-					<TextField style={{ marginBottom: 16}} name="email" label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
-					<TextField name="password" type="password" label="Password" onFieldChange={this.handleFieldChange} />
+					<TextField textFieldClass={classes.largeTextField} name="email" label="Email Id or phone number" onFieldChange={this.handleFieldChange} text />
+					<TextField textFieldClass={classes.largeTextField} name="password" type="password" label="Password" onFieldChange={this.handleFieldChange} />
 					<Typography variant="body1" style={{ paddingTop: 31, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
-					<Button onClick={() => auth.login(this.state.email,this.state.password)} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
+					<Button onClick={() => auth.login(this.state.email, this.state.password)} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
 				</PageTemplate>
 			</MuiThemeProvider>
 		)
