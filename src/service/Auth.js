@@ -20,12 +20,12 @@ class AuthService extends Component {
     }
     
     login = (email,password) => {
-       // console.log('email',email);
-        //console.log('password',password);
+        console.log('email',email);
+        console.log('password',password);
         this.auth0.login({
             realm: 'Username-Password-Authentication',
-            username: email,
-            password: password,
+            username: 'arpit.sharma@zemosolabs.com',
+            password: 'Test_11223',
             grant_type: 'password',
             audience: 'http://localhost:8080/graphiql'
         });
