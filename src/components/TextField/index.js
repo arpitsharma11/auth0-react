@@ -7,6 +7,9 @@ const styles = theme => ({
 
     input: {
         color: theme.palette.common.main,
+        fontSize: 13,
+        lineHeight: 13,
+        letterSpacing: 0.47
     },
     // inValid: {
     //     color: theme.palette.error.main,
@@ -19,9 +22,10 @@ const styles = theme => ({
         fontFamily: 'Roboto',
         fontSize: 13,
         color: '#000000',
-        opacity: 0.22,
+        opacity: 0.6,
         letterSpacing: '0.48px',
-        lineHeight: '13px'
+        lineHeight: '13px',
+        transform: 'none'
     },
     textField: {
         width: 343
@@ -72,7 +76,7 @@ const TextField = (props) => {
                 className: `${classes.input} `,
             }}
             InputLabelProps={{
-                shrink: true,
+                // shrink: true,
                 classes: {
                     root: classes.label
                 }

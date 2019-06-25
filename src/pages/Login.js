@@ -48,7 +48,7 @@ class Login extends Component {
 					<Typography variant="subtitle2" style={{ paddingBottom: 35 }}>
 						Please Log In to continue
 					</Typography>
-					<TextField name="email" label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
+					<TextField style={{ marginBottom: 16}} name="email" label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
 					<TextField name="password" type="password" label="Password" onFieldChange={this.handleFieldChange} />
 					<Typography variant="body1" style={{ paddingTop: 31, paddingBottom: 22 }}>
 						Forgot Password?
