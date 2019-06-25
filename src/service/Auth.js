@@ -19,15 +19,18 @@ class AuthService extends Component {
         return localStorage.getItem('idToken');
     }
     
-    login = (email,password) => {
+    login = async (email,password) => {
         console.log('email',email);
         console.log('password',password);
-        this.auth0.login({
+        await this.auth0.login({
             realm: 'Username-Password-Authentication',
             username: email,
             password: password,
             grant_type: 'password',
             audience: 'http://localhost:8080/graphiql'
+        }, (err) => {
+            console.log(err);
+            return err
         });
     }
 
