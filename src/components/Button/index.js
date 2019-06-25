@@ -56,13 +56,9 @@ const propTypes = {
 
 
 const Button = (props) => {
-    const handleClick = () => {
-        alert('clicked!');
-    }
     const {
         classes,
         rootClass,
-        onClick,
         color,
         ...rest
     } = props
@@ -78,7 +74,6 @@ const Button = (props) => {
                     label: classes.btnLabel
                 }
             }
-            onClick={handleClick}
             color={color}
             {...rest}
         >

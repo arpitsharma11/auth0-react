@@ -25,11 +25,12 @@ class Login extends Component {
 		super(props);
 		this.state = {
 			email: '',
-			password: ''
+			password: 'Test_11223'
 		}
 	}
-	handleFieldChange = (name, value) => {
-		this.setState({
+
+	handleFieldChange = async (name, value) => {
+		await this.setState({
 			[name]: value
 		});
 		//console.log(this.state);
@@ -37,7 +38,7 @@ class Login extends Component {
 
 	render() {
 		const { classes, auth } = this.props;
-
+		console.log(auth.isAuthenticated());
 		return (
 			<MuiThemeProvider theme={theme}>
 				<PageTemplate>
@@ -53,7 +54,7 @@ class Login extends Component {
 					<Typography variant="body1" style={{ paddingTop: 31, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
-					<Button title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
+					<Button onClick={() => auth.login(this.state.email,this.state.password)} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
 				</PageTemplate>
 			</MuiThemeProvider>
 		)
