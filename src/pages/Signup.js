@@ -9,6 +9,7 @@ import PageTemplate from '../components/templates/PageTemplate';
 import Logo from '../components/Logo'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import SignupProfile from '../components/SignupProfile';
 
 
 const styles = theme => ({
@@ -25,19 +26,70 @@ class Signup extends Component {
         super(props);
         this.state = {
             email: '',
-            password: 'Test_11223'
+            password: '',
+            rePassword: '',
+            emailError: false,
+            passwordError: false,
+            rePasswordError: false,
+            auth0Id: '',
+            userC : false
         }
     }
 
     handleFieldChange = async (name, value) => {
         await this.setState({
-            [name]: value
+            [name]: value,
+            [name+'Error']: false
         });
         //console.log(this.state);
     }
 
+    signup = () => {
+        const { auth } = this.props;
+        const { email, 
+                password, 
+                rePassword, 
+                emailError, 
+                passwordError, 
+                rePasswordError } = this.state;
+        console.log(this.state);
+        if( email != '' && password != '' && rePassword != ''){
+            if( password === rePassword )
+                auth.signup(email,password).then( res => {
+                    console.log(res);
+                    console.log(' New id',res.Id);
+                    this.setState({
+                        userC : true,
+                        auth0Id: res.Id
+                    })
+                })
+                .error( err => {
+                    console.log(err);
+                })
+            else
+                this.setState({
+                    rePasswordError: true
+                }) 
+        } else {
+            if(email == '')
+                this.setState({
+                    emailError: true
+                })
+            if(password == '')
+                this.setState({
+                    passwordError: true
+                })
+            if(rePassword == '')
+                this.setState({
+                    rePasswordError: true
+                })
+            }
+    }
+
     render() {
-        const { classes } = this.props;
+        const { classes, auth } = this.props;
+        const { emailError, passwordError, rePasswordError, userC, auth0Id, email } = this.state;
+
         return (
             <MuiThemeProvider theme={theme}>
                 <PageTemplate>
@@ -47,17 +99,18 @@ class Signup extends Component {
                         <span style={{ color: '#003A64' }}>Sign Up Now.</span>
                     </Typography>
 
-                    <TextField textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
-                    <TextField textFieldClass={classes.largeTextField} type="password" label="Password" onFieldChange={this.handleFieldChange} />
-                    <TextField textFieldClass={classes.largeTextField} type="password" label="Confirm Password" onFieldChange={this.handleFieldChange} />
+                    <TextField name="email" error={emailError} textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
+                    <TextField name="password" error={passwordError} textFieldClass={classes.largeTextField} type="password" label="Password" onFieldChange={this.handleFieldChange} />
+                    <TextField name="rePassword" error={rePasswordError} textFieldClass={classes.largeTextField} type="password" label="Confirm Password" onFieldChange={this.handleFieldChange} />
                     <span>
                         <TextField textFieldClass={classes.smallTextField} label="Referral Code" onFieldChange={this.handleFieldChange} />
                         <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
                     </span>
                     `<Typography variant="body1" style={{ paddingLeft: 66, paddingRight: 81, paddingTop: 35, paddingBottom: 31, textAlign: 'center' }}>
                         By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
-          </Typography>
-                    <Button title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
+                    </Typography>
+                    <Button onClick={() => this.signup() } title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
+                    { userC && <SignupProfile auth0Id={auth0Id} email={email} /> }
                 </PageTemplate>
             </MuiThemeProvider>
         )

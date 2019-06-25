@@ -35,10 +35,14 @@ class Login extends Component {
 		});
 	}
 
-	onLoginClick = () => {
+	onLoginClick = async () => {
 		const { email, password } = this.state;
 		if( email != '' && password != '' ){
-			this.props.auth.login(email,password);
+			this.props.auth.login(email,password).then(res => {
+				console.log(res);
+			}).error(err => {
+				console.log(err);
+			})
 			//console.log("result", res);
 		} else {
 			if(email == '')

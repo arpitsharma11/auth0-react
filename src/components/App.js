@@ -42,7 +42,7 @@ function App() {
 			<Router>
 				<Route exact path="/" component={AuthGaurd(Home)} />
 				<Route exact path="/login" component={AuthGaurd(Login)} />
-				<Route exact path="/signup" component={(Signup)} />
+				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
 			</Router>
 		</ApolloProvider>
