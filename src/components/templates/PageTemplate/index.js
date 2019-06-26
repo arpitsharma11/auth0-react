@@ -12,9 +12,9 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        minHeight: '100vh',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 100
     }
 
 });

@@ -19,12 +19,12 @@ const styles = theme => ({
         paddingBottom: 27
     },
     largeTextField: {
-        width: 329,
-        paddingBottom: 10
+        width: '86%',
+        paddingBottom: 14
     },
     smallTextField: {
-        width: 253,
-        paddingBottom: 10
+        width: '43%',
+        paddingBottom: 14
     },
     signUpTitle: {
         color: '#003A64'
@@ -32,9 +32,22 @@ const styles = theme => ({
     agreementText: {
         paddingLeft: 66,
         paddingRight: 81,
-        paddingTop: 35,
-        paddingBottom: 31,
+        paddingTop: 39,
+        paddingBottom: 15,
         textAlign: 'center'
+    },
+    referralText: {
+        alignSelf: 'flex-start',
+        marginLeft: '7%',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        opacity: 0.56,
+        color: '#000000',
+        fontFamily: "Roboto Medium",
+        fontSize: '13px',
+        letterSpacing: '0.62px',
+        lineHeight: '18px',
+        fontWeight: 600
     }
 });
 
@@ -122,19 +135,27 @@ class Signup extends Component {
                 <PageTemplate>
                     <Logo />
                     <Typography variant="subtitle1" className={classes.heading}>
-                        Get MPowered with us.
+                        Get Mpowered with us.
                         <span className={classes.signUpTitle}>Sign Up Now.</span>
                     </Typography>
                     {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField name="email" error={emailError} textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
                     <TextField name="password" error={passwordError} textFieldClass={classes.largeTextField} type="password" label="Password" onFieldChange={this.handleFieldChange} />
                     <TextField name="rePassword" error={rePasswordError} textFieldClass={classes.largeTextField} type="password" label="Confirm password" onFieldChange={this.handleFieldChange} />
-                    <span>
-                        <TextField textFieldClass={classes.smallTextField} label="Referral Code" onFieldChange={this.handleFieldChange} />
-                        <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
-                    </span>
+                    <Typography variant="body1" className={classes.referralText}>
+                        Referral Code
+          </Typography>
+
+
+                    <TextField textFieldClass={classes.largeTextField} label="Enter Code" onFieldChange={this.handleFieldChange} />
+                    <Button variant="text" title="Apply" color="secondary"
+                        style={{
+                            marginTop: '-47px',
+                            marginLeft: '74%'
+
+                        }} />
                     <Typography variant="body1" className={classes.agreementText}>
-                        By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
+                        By tapping Sign Up you agree on our Terms of Service and Privacy Policy
           </Typography>
                     <Mutation mutation={CREATE_USER}
                         onError={(error) => this.error()}

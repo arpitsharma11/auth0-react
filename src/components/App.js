@@ -9,6 +9,8 @@ import Login from '../pages/Login';
 import Callback from '../pages/Callback';
 import Signup from '../pages/Signup'
 import Auth from '../service/Auth';
+import HomeDashboard from '../pages/HomeDashboard';
+import LandingPage from '../pages/LandingPage';
 
 
 const client = new ApolloClient({
@@ -38,6 +40,7 @@ function App() {
 				<Route exact path="/login" component={AuthGaurd(Login)} />
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
+				<Route exact path="/home" component={(LandingPage)} />
 			</Router>
 		</ApolloProvider>
 	)

@@ -13,8 +13,8 @@ import { Typography } from '@material-ui/core';
 const styles = theme => ({
 
 	largeTextField: {
-		width: 329,
-		paddingBottom: 10
+		width: '86%',
+		paddingBottom: 14
 	}
 });
 
@@ -39,7 +39,7 @@ class Login extends Component {
 
 	onLoginClick = async () => {
 		const { email, password } = this.state;
-		if (email != '' && password != '' ) {
+		if (email != '' && password != '') {
 			this.props.auth.login(email, password).then(res => {
 				console.log(res);
 			}).catch(err => {

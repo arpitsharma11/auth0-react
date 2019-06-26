@@ -18,13 +18,13 @@ const styles = theme => ({
         color: theme.palette.secondary.main,
     },
     label: {
-        //add font and color styles
-        fontFamily: 'Roboto',
-        fontSize: 13,
-        color: '#000000',
         opacity: 0.6,
-        letterSpacing: '0.48px',
+        color: '#000000',
+        fontFamily: "Roboto Medium",
+        fontSize: 11,
+        letterSpacing: '0.52px',
         lineHeight: '13px',
+        fontWeight: 600,
         transform: 'none'
     }
 });

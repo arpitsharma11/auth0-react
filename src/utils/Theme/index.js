@@ -16,7 +16,7 @@ export default createMuiTheme({
             light: '#FFBC44',
             dark: 'rgb(93,175,240,0.2)',
             hover: '#FFBC44',
-            contrastText:'white'
+            contrastText: 'white'
         },
         secondary: {
             main: '#004987',
@@ -106,12 +106,15 @@ export default createMuiTheme({
         subtitle1: {
             fontSize: pxToRem(20),
             color: "#000000",
-            lineHeight: "normal"
+            lineHeight: "normal",
+            fontWeight: 550
         },
         //used call prep 
         subtitle2: {
             fontSize: pxToRem(17),
             color: "#003A64",
+            fontWeight: 550
+
         },
         body1: {
             fontSize: pxToRem(12),
@@ -164,7 +167,7 @@ export default createMuiTheme({
             },
         },
         MuiButton: {
-          
+
         },
         MuiIconButton: {
             root: {
