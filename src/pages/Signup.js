@@ -105,19 +105,19 @@ class Signup extends Component {
                 <PageTemplate>
                     <Logo />
                     <Typography variant="subtitle1" style={{ paddingTop: 41, paddingBottom: 27 }}>
-                        Get MPowered with us.
-                        <span style={{ color: '#003A64' }}>Sign Up Now.</span>
+                        Get mPowered with us.
+                        <span style={{ color: '#003A64' }}> Sign Up Now.</span>
                     </Typography>
                     { userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField name="email" error={emailError} textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
                     <TextField name="password" error={passwordError} textFieldClass={classes.largeTextField} type="password" label="Password" onFieldChange={this.handleFieldChange} />
-                    <TextField name="rePassword" error={rePasswordError} textFieldClass={classes.largeTextField} type="password" label="Confirm Password" onFieldChange={this.handleFieldChange} />
+                    <TextField name="rePassword" error={rePasswordError} textFieldClass={classes.largeTextField} type="password" label="Confirm password" onFieldChange={this.handleFieldChange} />
                     <span>
                         <TextField textFieldClass={classes.smallTextField} label="Referral Code" onFieldChange={this.handleFieldChange} />
                         <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
                     </span>
                     `<Typography variant="body1" style={{ paddingLeft: 66, paddingRight: 81, paddingTop: 35, paddingBottom: 31, textAlign: 'center' }}>
-                        By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
+                        By tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
                     <Mutation mutation={CREATE_USER}>
                         { ( createUser, { loading, error, data }) => (
