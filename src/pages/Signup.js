@@ -122,8 +122,8 @@ class Signup extends Component {
                 <PageTemplate>
                     <Logo />
                     <Typography variant="subtitle1" className={classes.heading}>
-                        Get MPowered with us.
-                        <span className={classes.signUpTitle}>Sign Up Now.</span>
+                        Get Mpowered with us.
+                        <span className={classes.signUpTitle}> Sign Up Now.</span>
                     </Typography>
                     {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField name="email" error={emailError} textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
@@ -134,7 +134,7 @@ class Signup extends Component {
                         <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
                     </span>
                     <Typography variant="body1" className={classes.agreementText}>
-                        By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
+                        By tapping Sign Up you agree on our Terms of Service and Privacy Policy
           </Typography>
                     <Mutation mutation={CREATE_USER}
                         onError={(error) => this.error()}
