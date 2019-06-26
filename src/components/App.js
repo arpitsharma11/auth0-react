@@ -30,12 +30,6 @@ function onStorage(data) {
 	window.location.reload();
 }
 
-if (window.addEventListener) {
-	window.addEventListener("storage", onStorage, false);
-} else {
-	window.attachEvent("onstorage", onStorage);
-};
-
 function App() {
 	return (
 		<ApolloProvider client={client}>

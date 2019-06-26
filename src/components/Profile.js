@@ -13,16 +13,16 @@ const GET_USER_PROFILE = gql`
 
 const Profile = (props) => (
 
-<Query query={GET_USER_PROFILE} variables={{  auth0id:props.auth0id }}>
-    {({ loading, error, data }) => {
-      console.log(props.auth0Id);
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(  {console.log("error",error)} </p>;
-        console.log(data)
-      return (
-          <div style={{color: "black"}} >Hi, {data.user.email}</div>
-      )
-    }}
+  <Query query={GET_USER_PROFILE} variables={{  auth0id:props.auth0id }}>
+      {({ loading, error, data }) => {
+        console.log(props.auth0Id);
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(  {console.log("error",error)} </p>;
+          console.log(data)
+        return (
+            <div style={{color: "black"}} >Hi, {data.user.email}</div>
+        )
+      }}
   </Query>
 );
 export default Profile;

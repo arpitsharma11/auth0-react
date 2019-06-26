@@ -18,6 +18,13 @@ class AuthService extends Component {
     getIdToken = () => {
         return localStorage.getItem('idToken');
     }
+
+    getAuth0Id = () => {
+        const sub = localStorage.getItem('sub');
+        const auth0Id = sub.split('|')[1]
+        console.log(auth0Id);
+        return auth0Id;
+    }
     
     login = (email,password) => {
         console.log('email',email);
@@ -65,6 +72,8 @@ class AuthService extends Component {
                 //localStorage.setItem('authResult',authResult)
                 localStorage.setItem('accessToken',authResult.accessToken);
                 localStorage.setItem('idToken',authResult.idToken);
+                localStorage.setItem('sub',authResult.idTokenPayload.sub);
+
                 //this.props.history.push('/')
                 window.location.replace('/')
             }
