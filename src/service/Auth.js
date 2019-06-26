@@ -8,7 +8,7 @@ class AuthService extends Component {
         domain: 'dev-rx0xlk6h.auth0.com',
         clientID: 'AcpBichZZwzS4c7neUWodRoxpwpcfVFv',
         responseType: 'token id_token',
-        redirectUri: 'http://localhost:3000/callback'
+        redirectUri: 'http://localhost:3000/callback',
     });
 
     getAccessToken = () => {
@@ -38,7 +38,8 @@ class AuthService extends Component {
                 username: email,
                 password: password,
                 grant_type: 'password',
-                audience: 'http://localhost:8080/graphiql'
+                audience: 'http://localhost:8080/graphiql',
+                //prompt: 'none'
             }, (err,result) => {
                 if(err){
                     console.log(err);

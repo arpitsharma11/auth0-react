@@ -41,7 +41,7 @@ class Signup extends Component {
             passwordError: false,
             rePasswordError: false,
             auth0Id: '',
-            userC : false
+            userError: false
         }
     }
 
@@ -53,7 +53,7 @@ class Signup extends Component {
         //console.log(this.state);
     }
 
-    signup = () => {
+    validation = () => {
         const { auth } = this.props;
         const { email, 
                 password, 
@@ -61,20 +61,10 @@ class Signup extends Component {
                 emailError, 
                 passwordError, 
                 rePasswordError } = this.state;
-        console.log(this.state);
-        if( email != '' && password != '' && rePassword != ''){
+        //console.log(this.state);
+        if( email != '' && password != '' && rePassword != '' && password.length >= 8){
             if( password === rePassword )
-                auth.signup(email,password).then( res => {
-                    console.log(res);
-                    console.log(' New id',res.Id);
-                    this.setState({
-                        userC : true,
-                        auth0Id: res.Id
-                    })
-                })
-                .error( err => {
-                    console.log(err);
-                })
+                return true
             else
                 this.setState({
                     rePasswordError: true
@@ -84,7 +74,7 @@ class Signup extends Component {
                 this.setState({
                     emailError: true
                 })
-            if(password == '')
+            if(password == '' || password.length < 8 )
                 this.setState({
                     passwordError: true
                 })
@@ -92,16 +82,23 @@ class Signup extends Component {
                 this.setState({
                     rePasswordError: true
                 })
-            }
+        }
+        return false;
     }
 
-    login = () => {
-        this.props.auth.login('test123@gmail.com','Test_11223')
+    login = (email,password) => {
+        this.props.auth.login(email,password);
+    }
+
+    error = () => {
+        this.setState({
+            userError : true
+        })
     }
 
     render() {
         const { classes, auth } = this.props;
-        const { emailError, passwordError, rePasswordError, userC, auth0Id, email } = this.state;
+        const { emailError, passwordError, rePasswordError, userC, auth0Id, email, userError, password } = this.state;
 
         return (
             <MuiThemeProvider theme={theme}>
@@ -111,7 +108,7 @@ class Signup extends Component {
                         Get MPowered with us.
                         <span style={{ color: '#003A64' }}>Sign Up Now.</span>
                     </Typography>
-
+                    { userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField name="email" error={emailError} textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
                     <TextField name="password" error={passwordError} textFieldClass={classes.largeTextField} type="password" label="Password" onFieldChange={this.handleFieldChange} />
                     <TextField name="rePassword" error={rePasswordError} textFieldClass={classes.largeTextField} type="password" label="Confirm Password" onFieldChange={this.handleFieldChange} />
@@ -123,11 +120,16 @@ class Signup extends Component {
                         By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
                     <Mutation mutation={CREATE_USER}>
-                        { ( createUser, { error, data} ) => (
+                        { ( createUser, { loading, error, data }) => (
                             <div>
-                                <Button onClick={() => createUser({ variables: {email: 'test123@gmail.com', password: 'Test_11223' } }) } title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
-                                {console.log("data",data)}
-                                {data && this.login()}
+                                <Button onClick={() => {
+                                        console.log("email",email);
+                                        console.log("password",password);
+                                        if( this.validation() )
+                                            createUser({ variables: {email: email, password: password } })
+                                    }} title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
+                                {data && this.login(email,password)}
+                                { error && this.error() }
                             </div>
                         )}
                     </Mutation>
