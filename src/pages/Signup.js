@@ -12,11 +12,27 @@ import { Typography } from '@material-ui/core';
 
 
 const styles = theme => ({
+    heading: {
+        paddingTop: 41,
+        paddingBottom: 27
+    },
     largeTextField: {
-        width: 353
+        width: 329,
+        paddingBottom:10
     },
     smallTextField: {
-        width: 253
+        width: 253,
+        paddingBottom:10
+    },
+    signUpTitle: {
+        color: '#003A64' 
+    },
+    agreementText: {
+         paddingLeft: 66,
+         paddingRight: 81,
+         paddingTop: 35,
+         paddingBottom: 31,
+        textAlign: 'center' 
     }
 });
 
@@ -42,9 +58,9 @@ class Signup extends Component {
             <MuiThemeProvider theme={theme}>
                 <PageTemplate>
                     <Logo />
-                    <Typography variant="subtitle1" style={{ paddingTop: 41, paddingBottom: 27 }}>
+                    <Typography variant="subtitle1" className={classes.heading}>
                         Get MPowered with us.
-                        <span style={{ color: '#003A64' }}>Sign Up Now.</span>
+                        <span className={classes.signUpTitle}>Sign Up Now.</span>
                     </Typography>
 
                     <TextField textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
@@ -54,7 +70,7 @@ class Signup extends Component {
                         <TextField textFieldClass={classes.smallTextField} label="Referral Code" onFieldChange={this.handleFieldChange} />
                         <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
                     </span>
-                    `<Typography variant="body1" style={{ paddingLeft: 66, paddingRight: 81, paddingTop: 35, paddingBottom: 31, textAlign: 'center' }}>
+                    `<Typography variant="body1" className={classes.agreementText}>
                         By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
           </Typography>
                     <Button title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />

@@ -13,7 +13,8 @@ import { Typography } from '@material-ui/core';
 const styles = theme => ({
 
 	largeTextField: {
-		width: 353
+		width: 329,
+		paddingBottom: 10
 	}
 });
 

@@ -26,12 +26,6 @@ const styles = theme => ({
         letterSpacing: '0.48px',
         lineHeight: '13px',
         transform: 'none'
-    },
-    largeTextField: {
-        width: 353
-    },
-    smallTextField: {
-        width: 253
     }
 
 
@@ -51,7 +45,6 @@ const TextField = (props) => {
     const {
         autoFocus,
         classes,
-        // className: textFieldClass,
         error,
         onChange,
         label,
@@ -69,8 +62,7 @@ const TextField = (props) => {
         <MUITextField
             autoFocus={autoFocus}
             classes={{
-                root: clsx(textFieldClass, classes.TextField),
-                // fullWidth: fullWidth ? classes.largeTextField : classes.smallTextField
+                root: clsx(textFieldClass, classes.TextField)
             }}
             label={label}
             placeholder={placeholder}
@@ -84,7 +76,6 @@ const TextField = (props) => {
                 className: `${classes.input} `,
             }}
             InputLabelProps={{
-                // shrink: true,
                 classes: {
                     root: classes.label
                 }
