@@ -105,7 +105,7 @@ class Signup extends Component {
                 <PageTemplate>
                     <Logo />
                     <Typography variant="subtitle1" style={{ paddingTop: 41, paddingBottom: 27 }}>
-                        Get mPowered with us.
+                        Get Mpowered with us.
                         <span style={{ color: '#003A64' }}> Sign Up Now.</span>
                     </Typography>
                     { userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
