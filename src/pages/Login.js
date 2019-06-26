@@ -24,7 +24,8 @@ class Login extends Component {
 			email: '',
 			password: '',
 			emailError: false,
-			passwordError: false
+			passwordError: false,
+			error: ''
 		}
 	}
 
@@ -37,11 +38,16 @@ class Login extends Component {
 
 	onLoginClick = async () => {
 		const { email, password } = this.state;
-		if (email != '' && password != '') {
+		if (email != '' && password != '' ) {
 			this.props.auth.login(email, password).then(res => {
 				console.log(res);
-			}).error(err => {
+			}).catch(err => {
 				console.log(err);
+				this.setState({
+					error: err.description,
+					emailError: true,
+					passwordError: true
+				})
 			})
 			//console.log("result", res);
 		} else {
@@ -58,7 +64,7 @@ class Login extends Component {
 
 	render() {
 		const { classes, auth } = this.props;
-		const { emailError, passwordError } = this.state;
+		const { emailError, passwordError, error } = this.state;
 
 		return (
 			<MuiThemeProvider theme={theme}>
@@ -70,6 +76,7 @@ class Login extends Component {
 					<Typography variant="subtitle2" style={{ paddingBottom: 35 }}>
 						Please Log In to continue
 					</Typography>
+					{error && <Typography style={{ color: 'red' }} variant="body1" >{error}</Typography>}
 					<TextField textFieldClass={classes.largeTextField} name="email" label="Email Id or phone number" error={emailError} onFieldChange={this.handleFieldChange} />
 					<TextField textFieldClass={classes.largeTextField} name="password" type="password" label="Password" error={passwordError} onFieldChange={this.handleFieldChange} />
 					<Typography variant="body1" style={{ paddingTop: 10, paddingBottom: 22 }}>

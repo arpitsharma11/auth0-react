@@ -9,7 +9,8 @@ import PageTemplate from '../components/templates/PageTemplate';
 import Logo from '../components/Logo'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import SignupProfile from '../components/SignupProfile';
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 
 const styles = theme => ({
@@ -20,6 +21,14 @@ const styles = theme => ({
         width: 253
     }
 });
+
+const CREATE_USER = gql`
+  mutation CreateUser( $email: String!,$password: String!) {
+    createUser(email: $email,password: $password) {
+      email
+    }
+  }
+`;
 
 class Signup extends Component {
     constructor(props) {
@@ -86,6 +95,10 @@ class Signup extends Component {
             }
     }
 
+    login = () => {
+        this.props.auth.login('test123@gmail.com','Test_11223')
+    }
+
     render() {
         const { classes, auth } = this.props;
         const { emailError, passwordError, rePasswordError, userC, auth0Id, email } = this.state;
@@ -109,8 +122,15 @@ class Signup extends Component {
                     `<Typography variant="body1" style={{ paddingLeft: 66, paddingRight: 81, paddingTop: 35, paddingBottom: 31, textAlign: 'center' }}>
                         By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
-                    <Button onClick={() => this.signup() } title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
-                    { userC && <SignupProfile auth0Id={auth0Id} email={email} /> }
+                    <Mutation mutation={CREATE_USER}>
+                        { ( createUser, { error, data} ) => (
+                            <div>
+                                <Button onClick={() => createUser({ variables: {email: 'test123@gmail.com', password: 'Test_11223' } }) } title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
+                                {console.log("data",data)}
+                                {data && this.login()}
+                            </div>
+                        )}
+                    </Mutation>
                 </PageTemplate>
             </MuiThemeProvider>
         )

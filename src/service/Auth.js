@@ -21,9 +21,12 @@ class AuthService extends Component {
 
     getAuth0Id = () => {
         const sub = localStorage.getItem('sub');
-        const auth0Id = sub.split('|')[1]
-        console.log(auth0Id);
-        return auth0Id;
+        if( sub ){
+            const auth0Id = sub.split('|')[1]
+            console.log(auth0Id);
+            return auth0Id;
+        }
+        return null;
     }
     
     login = (email,password) => {
