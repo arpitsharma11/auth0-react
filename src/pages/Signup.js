@@ -136,7 +136,11 @@ class Signup extends Component {
                     <Logo />
                     <Typography variant="subtitle1" className={classes.heading}>
                         Get Mpowered with us.
+<<<<<<< HEAD
                         <span className={classes.signUpTitle}>Sign Up Now.</span>
+=======
+                        <span className={classes.signUpTitle}> Sign Up Now.</span>
+>>>>>>> d3d9c5d710bfa714d07fbdcfe295949e8abb3e7c
                     </Typography>
                     {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField name="email" error={emailError} textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
