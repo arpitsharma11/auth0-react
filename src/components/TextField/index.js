@@ -32,9 +32,10 @@ const styles = theme => ({
     },
     smallTextField: {
         width: 253
+    },
+    TextField: {
+      paddingBottom: 20
     }
-
-
 });
 
 const defaultProps = {
