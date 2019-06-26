@@ -25,28 +25,38 @@ class Login extends Component {
 			email: '',
 			password: '',
 			emailError: false,
-			passwordError: false
+			passwordError: false,
+			error: ''
 		}
 	}
 
 	handleFieldChange = (name, value) => {
 		this.setState({
 			[name]: value,
-			[name+'Error']: false
+			[name + 'Error']: false
 		});
 	}
 
-	onLoginClick = () => {
+	onLoginClick = async () => {
 		const { email, password } = this.state;
-		if( email != '' && password != '' ){
-			this.props.auth.login(email,password);
+		if (email != '' && password != '' ) {
+			this.props.auth.login(email, password).then(res => {
+				console.log(res);
+			}).catch(err => {
+				console.log(err);
+				this.setState({
+					error: err.description,
+					emailError: true,
+					passwordError: true
+				})
+			})
 			//console.log("result", res);
 		} else {
-			if(email == '')
+			if (email == '')
 				this.setState({
 					emailError: true
 				})
-			if(password == '')
+			if (password == '')
 				this.setState({
 					passwordError: true
 				})
@@ -55,7 +65,7 @@ class Login extends Component {
 
 	render() {
 		const { classes, auth } = this.props;
-		const { emailError, passwordError } = this.state;
+		const { emailError, passwordError, error } = this.state;
 
 		return (
 			<MuiThemeProvider theme={theme}>
@@ -67,9 +77,10 @@ class Login extends Component {
 					<Typography variant="subtitle2" style={{ paddingBottom: 35 }}>
 						Please Log In to continue
 					</Typography>
-					<TextField textFieldClass={classes.largeTextField} name="email" label="Email Id or phone number" error={ emailError } onFieldChange={this.handleFieldChange} />
-				<TextField textFieldClass={classes.largeTextField} name="password" type="password" label="Password" error={passwordError} onFieldChange={this.handleFieldChange} />
-					<Typography variant="body1" style={{ paddingTop: 31, paddingBottom: 22 }}>
+					{error && <Typography style={{ color: 'red' }} variant="body1" >{error}</Typography>}
+					<TextField textFieldClass={classes.largeTextField} name="email" label="Email Id or phone number" error={emailError} onFieldChange={this.handleFieldChange} />
+					<TextField textFieldClass={classes.largeTextField} name="password" type="password" label="Password" error={passwordError} onFieldChange={this.handleFieldChange} />
+					<Typography variant="body1" style={{ paddingTop: 10, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
 					<Button onClick={() => this.onLoginClick()} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />

@@ -30,19 +30,13 @@ function onStorage(data) {
 	window.location.reload();
 }
 
-if (window.addEventListener) {
-	window.addEventListener("storage", onStorage, false);
-} else {
-	window.attachEvent("onstorage", onStorage);
-};
-
 function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
 				<Route exact path="/" component={AuthGaurd(Home)} />
 				<Route exact path="/login" component={AuthGaurd(Login)} />
-				<Route exact path="/signup" component={(Signup)} />
+				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
 			</Router>
 		</ApolloProvider>

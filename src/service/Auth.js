@@ -8,7 +8,7 @@ class AuthService extends Component {
         domain: 'dev-rx0xlk6h.auth0.com',
         clientID: 'AcpBichZZwzS4c7neUWodRoxpwpcfVFv',
         responseType: 'token id_token',
-        redirectUri: 'http://localhost:3000/callback'
+        redirectUri: 'http://localhost:3000/callback',
     });
 
     getAccessToken = () => {
@@ -18,20 +18,52 @@ class AuthService extends Component {
     getIdToken = () => {
         return localStorage.getItem('idToken');
     }
+
+    getAuth0Id = () => {
+        const sub = localStorage.getItem('sub');
+        if( sub ){
+            const auth0Id = sub.split('|')[1]
+            console.log(auth0Id);
+            return auth0Id;
+        }
+        return null;
+    }
     
-    login = async (email,password) => {
+    login = (email,password) => {
         console.log('email',email);
         console.log('password',password);
-        await this.auth0.login({
-            realm: 'Username-Password-Authentication',
-            username: email,
-            password: password,
-            grant_type: 'password',
-            audience: 'http://localhost:8080/graphiql'
-        }, (err) => {
-            console.log(err);
-            return err
-        });
+        return new Promise( (resolve,reject) => {
+            this.auth0.login({
+                realm: 'Username-Password-Authentication',
+                username: email,
+                password: password,
+                grant_type: 'password',
+                audience: 'http://localhost:8080/graphiql',
+                //prompt: 'none'
+            }, (err,result) => {
+                if(err){
+                    console.log(err);
+                    reject(err);
+                }
+                resolve(result);
+            });
+        })
+    }
+
+    signup =  (email,password) => {
+        console.log(email,password);
+        return new Promise( (resolve,reject) => {
+            this.auth0.signup({
+                connection: 'Username-Password-Authentication',
+                email: email,
+                password: password
+            }, (err,result) => {
+                if(err)
+                    reject(err);
+                resolve(result);
+                //this.login(email,password);
+            });
+        })
     }
 
     setSession = () => {
@@ -44,6 +76,8 @@ class AuthService extends Component {
                 //localStorage.setItem('authResult',authResult)
                 localStorage.setItem('accessToken',authResult.accessToken);
                 localStorage.setItem('idToken',authResult.idToken);
+                localStorage.setItem('sub',authResult.idTokenPayload.sub);
+
                 //this.props.history.push('/')
                 window.location.replace('/')
             }

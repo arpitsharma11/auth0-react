@@ -12,6 +12,12 @@ export default OriginalComponent => {
                 if(auth.isAuthenticated())
                     this.props.history.push('/')
 
+            if(window.location.pathname == '/signup')
+                if(auth.isAuthenticated())
+                    this.props.history.push('/')
+                else
+                    return;
+
             if(window.location.pathname != '/callback')
                 if(!auth.isAuthenticated())
                     this.props.history.push('/login')

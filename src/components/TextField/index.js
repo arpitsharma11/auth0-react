@@ -27,8 +27,6 @@ const styles = theme => ({
         lineHeight: '13px',
         transform: 'none'
     }
-
-
 });
 
 const defaultProps = {
