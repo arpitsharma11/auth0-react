@@ -92,7 +92,8 @@ class Signup extends Component {
 
     error = () => {
         this.setState({
-            userError : true
+            userError : true,
+            emailError: true
         })
     }
 
@@ -119,7 +120,9 @@ class Signup extends Component {
                     `<Typography variant="body1" style={{ paddingLeft: 66, paddingRight: 81, paddingTop: 35, paddingBottom: 31, textAlign: 'center' }}>
                         By tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
-                    <Mutation mutation={CREATE_USER}>
+                    <Mutation mutation={CREATE_USER}
+                        onError={(error) => this.error()}
+                    >
                         { ( createUser, { loading, error, data }) => (
                             <div>
                                 <Button onClick={() => {
@@ -129,7 +132,6 @@ class Signup extends Component {
                                             createUser({ variables: {email: email, password: password } })
                                     }} title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
                                 {data && this.login(email,password)}
-                                { error && this.error() }
                             </div>
                         )}
                     </Mutation>
