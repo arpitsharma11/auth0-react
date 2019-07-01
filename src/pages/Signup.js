@@ -64,6 +64,64 @@ class Signup extends Component {
         }
     }
 
+    emailValidation = () => {
+        const { email } = this.state;
+		if( email === '' ){
+			this.setState({ 
+                emailError: true,
+                emailErrorMsg: 'Required' 
+            })
+			return false
+		}
+		const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		if (reg.test(email) == false) {
+			this.setState({ 
+                emailError: true,
+                emailErrorMsg: 'Invalid email ID' 
+            })
+			return false;
+		}
+		return true;
+	}
+
+    passwordValidation = () => {
+        const { password } = this.state;
+		if( password === '' ){
+			this.setState({
+                passwordError: true,
+                passwordErrorMsg: 'Required' 
+            });
+			return false;
+        }
+        if( password.length < 8 ){
+            this.setState({
+                passwordError: true,
+                passwordErrorMsg: 'Required' 
+            });
+            return false;
+        }
+		return true;
+    }
+    
+    rePasswordValidation = () => {
+        const { rePassword } = this.state;
+		if( rePassword === '' ){
+            this.setState({
+                rePasswordError: true,
+                rePasswordErrorMsg: 'Required' 
+            });
+			return false;
+        }
+        if( rePassword !== this.state.password ){
+            this.setState({
+                rePasswordError: true,
+                rePasswordErrorMsg: 'Password does not match' 
+            });
+            return false;
+        }
+		return true;
+	}
+
     handleFieldChange = async (name, value) => {
         await this.setState({
             [name]: value,
@@ -74,56 +132,17 @@ class Signup extends Component {
     }
 
     validation = () => {
-        const { auth } = this.props;
         const { email,
             password,
-            rePassword,
-            emailError,
-            passwordError,
-            rePasswordError } = this.state;
-        //console.log(this.state);
-        if (email != '' && password != '' && rePassword != '' && password.length >= 8) {
-            if (password === rePassword)
-                return true
-            else
-                this.setState({
-                    rePasswordError: true
-                })
-        } else {
-            if (email == '')
-                this.setState({
-                    emailError: true,
-                    emailErrorMsg: 'Required'
-                })
-            else if( !validateEmail(email) ){
-                this.setState({
-                    emailError: true,
-                    emailErrorMsg: 'Invalid email ID'
-                })
-            }
-            if (password == '' )
-                this.setState({
-                    passwordError: true,
-                    passwordErrorMsg: 'Required'
-                })
-            else if ( password.length < 8)
-                this.setState({
-                    passwordError: true,
-                    passwordErrorMsg: 'Password length is too short'
-                })
-
-            if (rePassword == '')
-                this.setState({
-                    rePasswordError: true,
-                    rePasswordErrorMsg: 'Required'
-                })
-            else if( rePassword !== password )
-                this.setState({
-                    rePasswordError: true,
-                    rePasswordErrorMsg: 'Password does not match'
-                })
-        }
-        return false;
+            rePassword } = this.state;
+        let error = true;
+        if( !this.emailValidation() )
+            error = false;
+        if( !this.passwordValidation() )
+            error = false;
+        if( !this.rePasswordValidation() )
+            error = false;
+        return error
     }
 
     login = (email, password) => {
@@ -132,8 +151,7 @@ class Signup extends Component {
 
     onSignUpError = () => {
         this.setState({
-            userError: true,
-            emailError: true
+            userError: true
         })
     }
 
@@ -150,9 +168,31 @@ class Signup extends Component {
                         <span className={classes.signUpTitle}>Sign Up Now.</span>
                     </Typography>
                     {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
-                    <TextField name="email" error={emailError} errorMsg={ emailErrorMsg } textFieldClass={classes.largeTextField} label="Email Id or phone number" onFieldChange={this.handleFieldChange} />
-                    <TextField name="password" error={passwordError} errorMsg={ passwordErrorMsg } textFieldClass={classes.largeTextField} type="password" label="Password" onFieldChange={this.handleFieldChange} />
-                    <TextField name="rePassword" error={rePasswordError} errorMsg={ rePasswordErrorMsg } textFieldClass={classes.largeTextField} type="password" label="Confirm password" onFieldChange={this.handleFieldChange} />
+                    <TextField 
+                        name="email" 
+                        error={emailError} 
+                        errorMsg={ emailErrorMsg } 
+                        textFieldClass={classes.largeTextField} 
+                        label="Email Id or phone number" 
+                        onFieldChange={this.handleFieldChange} 
+                        onBlur={this.emailValidation} />
+                    <TextField 
+                        name="password" 
+                        error={passwordError} 
+                        errorMsg={ passwordErrorMsg } 
+                        textFieldClass={classes.largeTextField} 
+                        type="password" 
+                        label="Password" 
+                        onFieldChange={this.handleFieldChange} 
+                        onBlur={this.passwordValidation} />
+                    <TextField 
+                        name="rePassword" 
+                        error={rePasswordError} 
+                        errorMsg={ rePasswordErrorMsg } 
+                        textFieldClass={classes.largeTextField} 
+                        type="password" label="Confirm password" 
+                        onFieldChange={this.handleFieldChange} 
+                        onBlur={this.rePasswordValidation} />
                     <span>
                         <TextField textFieldClass={classes.smallTextField} label="Referral Code" onFieldChange={this.handleFieldChange} />
                         <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />

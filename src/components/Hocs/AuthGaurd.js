@@ -6,25 +6,33 @@ export default OriginalComponent => {
     const auth = new Auth();
 
     class MixedComponent extends Component {
-        checkAuth() {
-            //console.log('auth',auth.isAuthenticated())
-            if(window.location.pathname == '/login')
-                if(auth.isAuthenticated())
-                    this.props.history.push('/')
+        async checkAuth() {
+            if (localStorage.getItem('isLoggedIn') === 'true' ) {
+                await auth.renewSession().then( res => {
+                console.log('auth',auth.isAuthenticated())
+                auth.test();
+                if(window.location.pathname == '/login' && window.location.pathname == '/signup' && window.location.pathname == '/')
+                    if(auth.isAuthenticated())
+                        this.props.history.push('/home')
 
-            if(window.location.pathname == '/signup')
-                if(auth.isAuthenticated())
-                    this.props.history.push('/')
-                else
-                    return;
+                if(window.location.pathname != '/callback')
+                    if(!auth.isAuthenticated())
+                        this.props.history.push('/')
+                }).catch( err => {
 
-            if(window.location.pathname != '/callback')
-                if(!auth.isAuthenticated())
-                    this.props.history.push('/login')
+                });
+            } else {
+                if(window.location.pathname != '/signup' && window.location.pathname != '/login')
+                    this.props.history.push('/');
+            }
         }
 
         componentDidMount() {
             this.checkAuth();
+        }
+
+        componentWillMount(){
+            //this.checkAuth();
         }
 
         render() {

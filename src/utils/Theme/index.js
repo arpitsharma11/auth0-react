@@ -163,6 +163,13 @@ export default createMuiTheme({
                 }
             },
         },
+        MuiInputLabel: {
+            root: {
+                '&$error': {
+                    color: '#000000'
+                }
+            }
+        },
         MuiButton: {
           
         },

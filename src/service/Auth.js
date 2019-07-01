@@ -4,6 +4,11 @@ import auth0 from 'auth0-js';
 
 class AuthService extends Component {
 
+    accessToken;
+    idToken;
+    expiresAt;
+    //auth0Id;
+
     auth0 = new auth0.WebAuth({
         domain: 'dev-rx0xlk6h.auth0.com',
         clientID: 'AcpBichZZwzS4c7neUWodRoxpwpcfVFv',
@@ -12,18 +17,18 @@ class AuthService extends Component {
     });
 
     getAccessToken = () => {
-        return localStorage.getItem('accessToken');
+        return this.accessToken;
     }
 
     getIdToken = () => {
-        return localStorage.getItem('idToken');
+        return this.idToken;
     }
 
     getExpireIn = () => {
-        return localStorage.getItem('expiresIn');
+        return this.expiresAt;
     }
 
-    getAuth0Id = () => {
+    /*getAuth0Id = () => {
         const sub = localStorage.getItem('sub');
         if( sub ){
             const auth0Id = sub.split('|')[1]
@@ -31,7 +36,7 @@ class AuthService extends Component {
             return auth0Id;
         }
         return null;
-    }
+    }*/
     
     login = (email,password) => {
         //console.log('email',email);
@@ -56,52 +61,74 @@ class AuthService extends Component {
 
     setSession = () => {
         this.auth0.parseHash( (err, authResult) =>  {
-            if(err)
-                console.log(err)
-            else {
-                console.log(authResult);
-                window.location.hash = '';
-                //localStorage.setItem('authResult',authResult)
+            if (authResult && authResult.accessToken && authResult.idToken) {
                 this.setSessionData(authResult);
-                //this.props.history.push('/')
-                window.location.replace('/')
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.replace('/home');
+                //resolve();
+            } else if (err) {
+                this.logout();
+                console.log(err);
+                alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
+                reject();
             }
         })
-        //this.props.history.push('/')
     }
 
     setSessionData = (authResult) => {
-        console.log("hiiiiiiiiiiiiiiiii")
-        localStorage.setItem('accessToken',authResult.accessToken);
-        localStorage.setItem('idToken',authResult.idToken);
-        localStorage.setItem('sub',authResult.idTokenPayload.sub);
-        console.log('Hello anybody in there',new Date((authResult.expiresIn * 1000) + new Date().getTime()));
-        localStorage.setItem('expiresIn',((authResult.expiresIn * 1000) + new Date().getTime()));
+        console.log('Session Data Set Called');
+        console.log(authResult);
+        //let expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
+       // console.log("Auth Check", new Date().getTime() < expiresAt);
+        this.accessToken = authResult.accessToken;
+        this.idToken = authResult.idToken;
+        //this.expiresAt = expiresAt;
+    }
+
+    renewSession() {
+        console.log('check Session callled');
+        return new Promise( (resolve,reject) => {
+            this.auth0.checkSession({}, (err, authResult) => {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    this.setSessionData(authResult);
+                    //localStorage.setItem('isLoggedIn', 'true');
+                    //window.location.replace('/');
+                    //resolve();
+                } else if (err) {
+                    this.logout();
+                    console.log(err);
+                    alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
+                    reject();
+                }
+            });
+        });
     }
 
     logout = () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('idToken');
+        this.accessToken = null;
+        this.idToken = null;
+        this.expiresAt = 0;
         this.auth0.logout();
-        window.location.replace('/')
+        localStorage.removeItem('isLoggedIn');
+        window.location.replace('/');
     }
 
     isAuthenticated = () => {
-        console.log('current',new Date(new Date().getTime()));
-        console.log('expire',new Date(this.getExpireIn()));
-        if( new Date().getTime() > this.getExpireIn() ){
-            console.log('im silent');
-            const that = this;
-            this.auth0.checkSession({}, function (err, authResult) {
-                if(err)
-                    console.log(err);
-                that.setSessionData(authResult);
-            });
-        }
-        if( this.getAccessToken() && this.getIdToken())
+        // let expiresAt = this.expiresAt;
+        // console.log("Auth Check", new Date().getTime() < expiresAt);
+        // return new Date().getTime() < expiresAt;
+        if ( this.accessToken && this.idToken )
             return true;
         else
             return false;
+    }
+
+    test = () => {
+        console.log('------------------');
+        console.log('accessToken',this.accessToken);
+        console.log('idToken',this.idToken);
+        console.log('expiresAt',this.expiresAt);
+        console.log('------------------');
     }
 }
 

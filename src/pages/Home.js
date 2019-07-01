@@ -12,11 +12,14 @@ class Home extends Component {
     componentDidMount(){
     }
 
+    ez = () => {
+        console.log(this.props.auth.getAccessToken());
+    }
+
     render() {
         return (
             <div>
                 <img style={{marginLeft: 22}} src={'../../src/assets/images/dashboard.png'} />
-                <Profile auth0id={this.props.auth.getAuth0Id()} />
                 <Button style={{backgroundColor: theme.palette.primary.hover}} onClick={() => this.props.auth.logout()} title="Logout" color='primary' variant='contained' size="large" />
             </div>
         )

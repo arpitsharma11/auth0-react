@@ -7,6 +7,7 @@ import AuthGaurd from './Hocs/AuthGaurd';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Callback from '../pages/Callback';
+import LandingPage from '../pages/LandingPage';
 import Signup from '../pages/Signup';
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from 'apollo-link-context'
@@ -43,10 +44,11 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<Route exact path="/" component={AuthGaurd(Home)} />
+				<Route exact path="/home" component={AuthGaurd(Home)} />
 				<Route exact path="/login" component={AuthGaurd(Login)} />
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
+				<Route exact path="/" component={AuthGaurd(LandingPage)} />
 			</Router>
 		</ApolloProvider>
 	)

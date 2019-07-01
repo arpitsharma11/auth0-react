@@ -45,49 +45,61 @@ class Login extends Component {
 	handleFieldChange = (name, value) => {
 		this.setState({
 			[name]: value,
-			[name + 'Error']: false,
+			[name + 'Error']: '',
 			[name + 'ErrorMsg']: '',
 			error: ''
 		});
 	}
 
+	emailValidation = () => {
+		const { email } = this.state;
+		if( email === '' ){
+			this.setState({ 
+				emailError: true,
+				emailErrorMsg: 'Required' 
+			});
+			return false
+		}
+		const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		if (reg.test(email) == false) {
+			this.setState({ 
+				emailError: true,
+				emailErrorMsg: 'Invalid email ID' 
+			})
+			return false;
+		}
+		return true;
+	}
+
+	passwordValidation = () => {
+		const { password } = this.state;
+		if( password === '' ){
+			this.setState({ 
+				passwordError: true,
+				passwordErrorMsg: 'Required' 
+			});
+			return false;
+		}
+		return true;
+	}
+
 	onLoginClick = async () => {
 		const { email, password } = this.state;
-		if (email != '' && password != '' ) {
-			this.props.auth.login(email, password).then(res => {
-				console.log(res);
-			}).catch(err => {
-				console.log(err);
-				this.setState({
-					error: err.description,
-					emailError: true,
-					passwordError: true,
-				})
-			})
-			//console.log("result", res);
-		} else {
-			if (email == '')
-				this.setState({
-					emailError: true,
-					emailErrorMsg: 'Required'
-				})
-			else if( !validateEmail(email) )
-				this.setState({
-					emailError: true,
-					emailErrorMsg: 'Invalid email ID'
-				})
+		let error = true;
+        if( !this.emailValidation() )
+            error = false;
+        if( !this.passwordValidation() )
+            error = false;
 
-			if (password == '')
-				this.setState({
-					passwordError: true,
-					passwordErrorMsg: 'Required'
+		if( error )
+			this.props.auth.login(email, password).then(res => {
+					console.log(res);
+				}).catch(err => {
+					console.log(err);
+					this.setState({
+						error: err.description
+					})
 				})
-			else if ( password.length < 8)
-                this.setState({
-                    passwordError: true,
-                    passwordErrorMsg: 'Password length is too short'
-                })
-		}
 	}
 
 	render() {
@@ -105,8 +117,23 @@ class Login extends Component {
 						Please Log In to continue
 					</Typography>
 					{error && <Typography style={{ color: 'red' }} variant="body1" >{error}</Typography>}
-					<TextField textFieldClass={classes.largeTextField} name="email" label="Email Id or phone number" error={emailError} errorMsg={emailErrorMsg} onFieldChange={this.handleFieldChange} />
-					<TextField textFieldClass={classes.largeTextField} name="password" type="password" label="Password" error={passwordError} errorMsg={passwordErrorMsg}  onFieldChange={this.handleFieldChange} />
+					<TextField 	
+						//onFocus={this.handleFocus}
+						onBlur={this.emailValidation} 
+						textFieldClass={classes.largeTextField} 
+						name="email" label="Email Id or phone number" 
+						error={emailError} 
+						errorMsg={emailErrorMsg} 
+						onFieldChange={this.handleFieldChange} />
+					<TextField 
+						onBlur={this.passwordValidation}
+						textFieldClass={classes.largeTextField} 
+						name="password" 
+						type="password" 
+						label="Password" 
+						error={passwordError} 
+						errorMsg={passwordErrorMsg}  
+						onFieldChange={this.handleFieldChange} />
 					<Typography variant="body1" style={{ paddingTop: 10, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
