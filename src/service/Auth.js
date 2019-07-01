@@ -89,25 +89,42 @@ class AuthService extends Component {
 
     renewSession() {
         //console.log('check Session callled');
-            return new Promise( (resolve,reject) => {
-                this.auth0.checkSession({
-                    audience: 'http://localhost:8080/graphiql',}, (err, authResult) => {
-                    if (authResult && authResult.accessToken && authResult.idToken) {
-                        this.setSessionData(authResult);
-                        //localStorage.setItem('isLoggedIn', 'true');
-                        //window.location.replace('/home');
-    
-                        resolve();
-                    } else if (err) {
-                        this.logout();
-                        console.log(err);
-                        window.location.replace('/');
-                        localStorage.removeItem('isLoggedIn');
-                        alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
-                        reject();
-                    }
-                });
-            } )
+        this.auth0.checkSession({
+            audience: 'http://localhost:8080/graphiql',}, (err, authResult) => {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                this.setSessionData(authResult);
+                //localStorage.setItem('isLoggedIn', 'true');
+                //window.location.replace('/home');
+                console.log('yo123');
+                //resolve();
+            } else if (err) {
+                this.logout();
+                console.log(err);
+                window.location.replace('/');
+                localStorage.removeItem('isLoggedIn');
+                alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
+                //reject();
+            }
+        });
+            // return new Promise( (resolve,reject) => {
+            //     this.auth0.checkSession({
+            //         audience: 'http://localhost:8080/graphiql',}, (err, authResult) => {
+            //         if (authResult && authResult.accessToken && authResult.idToken) {
+            //             this.setSessionData(authResult);
+            //             //localStorage.setItem('isLoggedIn', 'true');
+            //             //window.location.replace('/home');
+                        
+            //             resolve();
+            //         } else if (err) {
+            //             this.logout();
+            //             console.log(err);
+            //             window.location.replace('/');
+            //             localStorage.removeItem('isLoggedIn');
+            //             alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
+            //             reject();
+            //         }
+            //     });
+            // } )
     }
 
     logout = () => {
@@ -123,7 +140,7 @@ class AuthService extends Component {
         // let expiresAt = this.expiresAt;
         // console.log("Auth Check", new Date().getTime() < expiresAt);
         // return new Date().getTime() < expiresAt;
-        console.log(this.accessToken && this.idToken ); 
+        console.log(this.accessToken, this.idToken ); 
         if ( this.accessToken && this.idToken )
             return true;
         else
