@@ -16,7 +16,11 @@ const styles = theme => ({
 });
 
 class LandingPage extends Component {
+
     render() {
+
+        console.log(localStorage.getItem('inLoggedIn'));
+
         return (
             <MuiThemeProvider theme={theme}>
                 <PageTemplate>

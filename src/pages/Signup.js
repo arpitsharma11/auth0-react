@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -145,6 +146,24 @@ class Signup extends Component {
         return error
     }
 
+    singUpCall = () => {
+        console.log('post call');
+        const { email, password } = this.state;
+        if( this.validation() ){
+            axios.post('http://172.16.17.247:8080/user/signup/',{
+                "email": email,
+                "password": password
+            })
+            .then((response) => {
+                //console.log(response);
+                this.login(email,password);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+    }
+
     login = (email, password) => {
         this.props.auth.login(email, password);
     }
@@ -200,21 +219,9 @@ class Signup extends Component {
                     <Typography variant="body1" className={classes.agreementText}>
                         By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
-                    <Mutation mutation={CREATE_USER}
-                        onError={(error) => this.onSignUpError()}
-                    >
-                        {(createUser, { loading, error, data }) => (
-                            <div>
-                                <Button onClick={() => {
-                                    console.log("email", email);
-                                    console.log("password", password);
-                                    if (this.validation())
-                                        createUser({ variables: { email: email, password: password } })
-                                }} title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
-                                {data && this.login(email, password)}
-                            </div>
-                        )}
-                    </Mutation>
+                    <Button 
+                        onClick = { () => this.singUpCall() }
+                        title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
                 </PageTemplate>
             </MuiThemeProvider>
         )

@@ -7,22 +7,24 @@ export default OriginalComponent => {
 
     class MixedComponent extends Component {
         async checkAuth() {
-            if (localStorage.getItem('isLoggedIn') === 'true' ) {
-                await auth.renewSession().then( res => {
-                console.log('auth',auth.isAuthenticated())
-                auth.test();
-                if(window.location.pathname == '/login' && window.location.pathname == '/signup' && window.location.pathname == '/')
-                    if(auth.isAuthenticated())
-                        this.props.history.push('/home')
-
-                if(window.location.pathname != '/callback')
-                    if(!auth.isAuthenticated())
-                        this.props.history.push('/')
-                }).catch( err => {
-
-                });
+            if( localStorage.getItem('isLoggedIn') === 'true' ){
+                if( !auth.isAuthenticated() ){
+                    auth.renewSession()
+                    .then( () => {
+                        if( window.location.pathname != '/signup' || window.location.pathname != '/login' || window.location.pathname != '/' )
+                            this.props.history.push('/home');
+                    })
+                    .catch(() => {
+                        alert('lol');
+                    })
+                } else {
+                    if( window.location.pathname != '/signup' || window.location.pathname != '/login' || window.location.pathname != '/' )
+                        this.props.history.push('/home');
+                }
             } else {
-                if(window.location.pathname != '/signup' && window.location.pathname != '/login')
+                if( window.location.pathname === '/callback' )
+                    return;
+                if (window.location.pathname != '/signup' && window.location.pathname != '/login')
                     this.props.history.push('/');
             }
         }
@@ -32,7 +34,6 @@ export default OriginalComponent => {
         }
 
         componentWillMount(){
-            //this.checkAuth();
         }
 
         render() {
