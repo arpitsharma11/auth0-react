@@ -183,13 +183,6 @@ export default createMuiTheme({
                 // height: '13vh'
             }
         },
-
-        MuiFormHelperText: {
-            error: {
-                color: '#FF7E7E !important',
-                // marginBottom: '.8vh'
-            }
-        },
         MuiPickersModal: {
             dialogAction: {
                 // color: blue['400']

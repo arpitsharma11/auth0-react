@@ -30,7 +30,7 @@ module.exports = {
                         loader: "url-loader",
                         options: {
                             limit: 21000,
-                            name: "images/[name]_[hash:7].[ext]"
+                            name: "[name]_[hash:7].[ext]"
                         }
                     }
                 ]
@@ -41,8 +41,8 @@ module.exports = {
                 test: /\.css$/,
                 include: path.resolve(__dirname, '../node_modules'),
                 use: [
-                'style-loader',
-                'css-loader'
+                    'style-loader',
+                    'css-loader'
                 ],
             },
         ]

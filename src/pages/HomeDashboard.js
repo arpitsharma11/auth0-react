@@ -11,6 +11,13 @@ import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import IconContainer from '../components/IconContainer';
 import IconContainerTemplate from '../components/templates/IconContainerTemplate';
+import Footer from '../components/Footer';
+import SearchBar from '../components/SearchBar';
+import Header from '../components/Header';
+import Cards from '../components/Card'
+import CardContainerTemplate from '../components/templates/CardContainerTemplate';
+import NoDataCards from '../components/NoDataCards';
+
 
 const styles = theme => ({})
 
@@ -22,13 +29,16 @@ class HomeDashboard extends Component {
 
 
         return (
-            
-             <IconContainerTemplate>
-                 <IconContainer caption="Award Points" />
-                 <IconContainer caption="hello" />
-                 <IconContainer caption="holaa" />
-                 <IconContainer caption="yess" />
-             </IconContainerTemplate>
+
+            <div>
+                <IconContainerTemplate />
+                {/* <CardContainerTemplate /> */}
+                <NoDataCards text="Stay on top of your medical bills" />
+                <NoDataCards text="Refer and earn points"  />
+                <Footer activeState={1} />
+            </div>
+
+
 
 
         )

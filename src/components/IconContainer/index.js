@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
 import MuiButton from '@material-ui/core/Button';
-import clsx from 'clsx';
 
 const styles = theme => ({
 
@@ -26,13 +25,19 @@ const IconContainer = (props) => {
         src,
         alt,
         caption,
+        bgImage,
+        image,
         ...rest
     } = props
 
     return (
         <div>
-            <img className={classes.icon} src="../../assets/images/yellow.svg" alt="" />
-            <Typography>{caption}</Typography>
+
+            <img className={classes.icon} src={bgImage} alt="yo" />
+            <img style={{ marginLeft: '-41px' }} src={image} alt="" />
+            <Typography style={{
+                width: 45, height: 34, color: '#000000', fontWeight: 500, textAlign: 'center', fontSize: 13
+            }}>{caption}</Typography>
         </div>
     )
 };

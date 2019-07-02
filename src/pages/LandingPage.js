@@ -28,7 +28,7 @@ class LandingPage extends Component {
                         Please log in or sign up to continue
 					</Typography>
                     <Button color="primary" title="Log in" variant="contained" size="large" />
-                    <Button title="Sign up" variant="outlined" size="large" style={{ marginTop: 16, opacity: 0.34, borderColor: '#D2D2D2' }} />
+                    <Button title="Sign up" variant="outlined" size="large" style={{ marginTop: 16, opacity: 0.6, borderColor: '#D2D2D2' }} />
                 </PageTemplate>
             </MuiThemeProvider>
         )
