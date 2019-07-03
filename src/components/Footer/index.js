@@ -64,7 +64,7 @@ const Footer = (props) => {
                 <BottomNavigationAction label="Circles" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/circles_light.svg")} />} />}
             {activeState === 3 ?
                 <BottomNavigationAction label="Utilities" className={classes.textActive} icon={<img src={require("../../assets/images/home.svg")} />} /> :
-                <BottomNavigationAction label="Utilities" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/home_light.svg")} />} />}
+                <BottomNavigationAction label="Utilities" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/utilities_light.svg")} />} />}
 
         </BottomNavigation>
     )
