@@ -33,8 +33,8 @@ class HomeDashboard extends Component {
             <div>
                 <IconContainerTemplate />
                 {/* <CardContainerTemplate /> */}
-                <NoDataCards text="Stay on top of your medical bills" />
-                <NoDataCards text="Refer and earn points"  />
+                <NoDataCards text="Stay on top of your medical bills" src={require('../assets/images/bigBills.svg')} />
+                <NoDataCards text="Refer and earn points" src={require('../assets/images/colleagues.svg')}   />
                 <Footer activeState={1} />
             </div>
 

@@ -22,7 +22,7 @@ const IconContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
         <Grid container className={classes.root} spacing={2}>
-            <Grid item xs={8}>
+            <Grid item sm={6} md={6} lg={6}>
                 <Grid container
                     justify="center"
                     spacing={2}>
