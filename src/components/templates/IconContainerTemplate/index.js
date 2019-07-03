@@ -24,19 +24,13 @@ const styles = theme => ({
 const IconContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
-        <Grid container className={classes.root}>
-            <Grid item xs={8}>
-                <Grid container
-                    justify="center">
-                    {data && data.map(value => (
-                        <Grid key={value} className={classes.icon} item>
-                            <IconContainer caption={value.caption} bgImage={value.bgImage} image={value.image} />
-                        </Grid>
-                    ))}
+        <Grid container className={classes.root} spacing={2}>
+            {data && data.map(value => (
+                <Grid item xs={3} key={value}>
+                    <IconContainer caption={value.caption} bgImage={value.bgImage} image={value.image} />
                 </Grid>
-            </Grid>
+            ))}
         </Grid>
-
     )
 }
 

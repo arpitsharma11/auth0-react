@@ -14,7 +14,8 @@ const styles = theme => ({
         border: '1px solid #dfd9d9',
         height: 110,
         backgroundColor: '#feffff',
-        borderRadius: 5
+        borderRadius: 5,
+        boxShadow: 'none'
     }
 });
 
