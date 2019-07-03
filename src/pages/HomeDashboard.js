@@ -20,7 +20,7 @@ import NoDataCards from '../components/NoDataCards';
 
 
 const styles = theme => ({
-    root:{
+    root: {
         marginTop: '24px',
         marginLeft: '20px'
     },
@@ -44,13 +44,12 @@ class HomeDashboard extends Component {
 
         return (
             <div>
-                <Header/>
+                <Header />
                 <div className={classes.root} >
                     <Typography className={classes.heading} > Recently used services </Typography>
                     <IconContainerTemplate />
-                    {/* <CardContainerTemplate /> */}
                     <Typography className={classes.heading} > Your alerts </Typography>
-                    
+
                 </div>
                 <Footer activeState={1} />
             </div>

@@ -40,7 +40,7 @@ const Cards = (props) => {
         <Card className={classes.card} style={{ backgroundColor: background }}>
             <CardContent>
                 <span>
-                    <Typography color="textSecondary" style={{ float: 'left', width: 67, color: '#fff', fontSize: 13 }}>
+                    <Typography color="textSecondary" style={{ float: 'left', width: 67, color: '#fff', fontSize: 13, paddingTop: 4 }}>
                         {title}
                     </Typography>
                     <img style={{ float: 'right' }} src={src} />

@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import MuiButton from '@material-ui/core/Button';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -34,21 +33,22 @@ const NoDataCards = (props) => {
         rootClass,
         title,
         background,
-        imageSource,
+        src,
         text,
         ...rest
     } = props
     return (
         <Card className={classes.card} >
             <CardContent style={{ marginTop: 10 }}>
-                <img style={{ float: 'left' }} src={require('../../assets/images/bigBills.svg')} />
-                <span style={{ fontSize: 12, width: 117, float: 'left', marginLeft: 33 }}>{text}</span>
-                <Button style={{ float: 'right' }} color="primary" variant="outlined" title="Upload" />
+                <img style={{ float: 'left' }} src={src} />
+                <span style={{ fontSize: 12, width: 117, float: 'left', marginLeft: 28, textAlign: 'center', marginTop: 11 }}>{text}</span>
+                <Button style={{
+                    float: 'right', width: 77, height: 27, backgroundColor: '#feffff', color: '#003a64', marginTop: 15
+                }} color="primary" variant="outlined" title="Upload" />
             </CardContent>
         </Card>
     );
 };
-
 NoDataCards.defaultProps = defaultProps;
 NoDataCards.propTypes = propTypes;
 
