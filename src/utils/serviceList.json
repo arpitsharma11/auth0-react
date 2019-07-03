@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Second opinions",
+        "icon": "/src/assets/images/secondOpinion.svg",
+        "background": "#00a0df"
+    },
+    {
+        "title": "Diagnoses",
+        "icon": "/src/assets/images/diagnoses.svg",
+        "background": "#e08433"
+    },
+    {
+        "title": "Consults",
+        "icon": "/src/assets/images/consults.svg",
+        "background": "#ffa400"
+    },
+    {
+        "title": "Bills",
+        "icon": "/src/assets/images/billsService.svg",
+        "background": "#004987"
+    },
+    {
+        "title": "Medication",
+        "icon": "/src/assets/images/medication.svg",
+        "background": "#a32053"
+    },
+    {
+        "title": "Consents",
+        "icon": "/src/assets/images/consents.svg",
+        "background": "#e08433"
+    },
+    {
+        "title": "Vision",
+        "icon": "/src/assets/images/vision.svg",
+        "background": "#004987"
+    },
+    {
+        "title": "Advanced Directives",
+        "icon": "/src/assets/images/advancedDirectives.svg",
+        "background": "#00a0df"
+    },
+    {
+        "title": "Labs",
+        "icon": "/src/assets/images/labsService.svg",
+        "background": "#00a0df"
+    },
+    {
+        "title": "Dental",
+        "icon": "/src/assets/images/dental.svg",
+        "background": "#a32053"
+    }
+]
