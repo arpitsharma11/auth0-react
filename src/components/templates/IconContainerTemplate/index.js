@@ -27,7 +27,7 @@ const IconContainerTemplate = (props) => {
         <Grid container className={classes.root} spacing={2}>
             {data && data.map(value => (
                 <Grid item xs={3} key={value}>
-                    <IconContainer caption={value.caption} bgImage={value.bgImage} image={value.image} />
+                    <IconContainer caption={value.caption} bgImage={value.bgImage} image={value.image} notifications={value.notifications} />
                 </Grid>
             ))}
         </Grid>

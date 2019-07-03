@@ -2,21 +2,25 @@
     {
         "caption": "Award Points",
         "bgImage": "/src/assets/images/yellow.svg",
-        "image": "/src/assets/images/award_points.svg"
+        "image": "/src/assets/images/award_points.svg",
+        "notifications": 2
     },
     {
         "caption": "Bills",
         "bgImage": "/src/assets/images/dark_blue.svg",
-        "image": "/src/assets/images/bills.svg"
+        "image": "/src/assets/images/bills.svg",
+        "notifications": 0
     },
     {
         "caption": "Labs",
         "bgImage": "/src/assets/images/orange.svg",
-        "image": "/src/assets/images/labs.svg"
+        "image": "/src/assets/images/labs.svg",
+        "notifications": 1
     },
     {
         "caption": "Second Opinion",
         "bgImage": "/src/assets/images/blue.svg",
-        "image": "/src/assets/images/second_opinion.svg"
+        "image": "/src/assets/images/second_opinion.svg",
+        "notifications": 0
     }
 ]

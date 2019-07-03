@@ -20,7 +20,7 @@ import NoDataCards from '../components/NoDataCards';
 
 
 const styles = theme => ({
-    root:{
+    root: {
         marginTop: '24px',
         marginLeft: '20px',
         marginRight: '20px'
@@ -71,7 +71,7 @@ const styles = theme => ({
 
 class HomeDashboard extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             newUser: true
@@ -85,9 +85,9 @@ class HomeDashboard extends Component {
 
         return (
             <div>
-                <Header/>
+                <Header />
                 <div className={classes.root} >
-                    { newUser ? 
+                    {newUser ?
                         <React.Fragment>
                             <Typography className={classes.heading} > Hi Robert </Typography>
                             <Typography className={classes.helper} > Here are the services you can use </Typography>
@@ -95,18 +95,18 @@ class HomeDashboard extends Component {
                         <Typography className={classes.heading} > Recently used services </Typography>
                     }
                     <div>
-                    <IconContainerTemplate /></div>
+                        <IconContainerTemplate /></div>
                     <hr className={classes.line} />
-                    { newUser ? 
-                        <Typography className={classes.subHeading} >Let’s get you started</Typography>:
+                    {newUser ?
+                        <Typography className={classes.subHeading} >Let’s get you started</Typography> :
                         <Typography className={classes.heading} > Your alerts </Typography>
                     }
                     <div className={classes.cardContainer} >
                         <div className={classes.card} ><NoDataCards text="Stay on top of your medical bills" src={require('../assets/images/bigBills.svg')} /></div>
-                        <div className={classes.card} ><NoDataCards text="Refer and earn points" src={require('../assets/images/colleagues.svg')}   /></div>
+                        <div className={classes.card} ><NoDataCards text="Refer and earn points" src={require('../assets/images/colleagues.svg')} /></div>
                     </div>
                 </div>
-                <Footer activeState={1} />
+                <Footer activeState={0} />
             </div>
         )
     }

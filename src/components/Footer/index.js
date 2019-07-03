@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { Route, withRouter } from 'react-router-dom';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -39,19 +40,32 @@ const Footer = (props) => {
         rootClass,
         className,
         activeState,
+        history,
         ...rest
     } = props
 
+    const handleClick = (event, newValue) => {
+        switch (newValue) {
+            case 0:
+                history.push('/abc')
+                break;
+            case 1:
+                history.push('/services')
+                break;
+            case 2:
+                console.log("is")
+                break;
+            case 3:
+                console.log("it")
+                break;
+        }
+    }
 
     return (
         <BottomNavigation
-            // value={value}
-            // onChange={(event, newValue) => {
-            //     setValue(newValue);
-            // }}
+            onChange={handleClick}
             showLabels
             className={classes.root}
-            classes={{ root: classes }}
         >
             {activeState === 0 ?
                 <BottomNavigationAction label="Home" classes={{ label: classes.textActive }} icon={<img src={require("../../assets/images/home.svg")} />} /> :
@@ -65,7 +79,6 @@ const Footer = (props) => {
             {activeState === 3 ?
                 <BottomNavigationAction label="Utilities" className={classes.textActive} icon={<img src={require("../../assets/images/home.svg")} />} /> :
                 <BottomNavigationAction label="Utilities" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/utilities_light.svg")} />} />}
-
         </BottomNavigation>
     )
 }
@@ -73,4 +86,4 @@ const Footer = (props) => {
 Footer.defaultProps = defaultProps;
 Footer.propTypes = propTypes;
 
-export default withStyles(styles, { withTheme: true })(Footer);
+export default withRouter(withStyles(styles, { withTheme: true })(Footer));
