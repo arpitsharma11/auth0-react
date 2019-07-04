@@ -11,8 +11,8 @@ import Callback from '../pages/Callback';
 import LandingPage from '../pages/LandingPage';
 import Signup from '../pages/Signup';
 import HeaderFooterView from '../components/HeaderFooterView';
-import { createHttpLink } from "apollo-link-http";
-import { setContext } from 'apollo-link-context'
+// import { createHttpLink } from "apollo-link-http";
+// import { setContext } from 'apollo-link-context'
 import ServicesDashboard from '../pages/ServicesDashboard';
 
 /*const httpLink = createHttpLink({ uri: "http://172.16.17.247:8080/graphql" });
