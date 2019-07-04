@@ -10,7 +10,7 @@ import Button from '../Button'
 
 const styles = theme => ({
     card: {
-        width: 333,
+        width: '100%',
         border: '1px solid #dfd9d9',
         height: 110,
         backgroundColor: '#feffff',

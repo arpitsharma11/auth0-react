@@ -10,7 +10,7 @@ import Login from '../pages/Login';
 import Callback from '../pages/Callback';
 import LandingPage from '../pages/LandingPage';
 import Signup from '../pages/Signup';
-import Test from '../pages/Test'
+import Test from '../pages/Test';
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from 'apollo-link-context'
 import ServicesDashboard from '../pages/ServicesDashboard';
@@ -30,6 +30,16 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
 	link: authLink.concat(httpLink)
 })*/
+
+if (window.addEventListener) {
+	window.addEventListener("storage", onStorage, false);
+} else {
+	window.attachEvent("onstorage", onStorage);
+};
+  
+function onStorage(data) {
+	window.location.reload();
+}
 
 
 const client = new ApolloClient({

@@ -150,7 +150,7 @@ class Signup extends Component {
         console.log('post call');
         const { email, password } = this.state;
         if( this.validation() ){
-            axios.post('http://172.16.17.247:8080/user/signup/',{
+            axios.post('http://54.70.201.62:8080/user/signup/',{
                 "email": email,
                 "password": password
             })

@@ -18,9 +18,11 @@ import Cards from '../components/Card'
 import CardContainerTemplate from '../components/templates/CardContainerTemplate';
 import NoDataCards from '../components/NoDataCards';
 
+import alert1 from '../assets/images/alert1.svg';
+
 
 const styles = theme => ({
-    root: {
+    root:{
         marginTop: '24px',
         marginLeft: '20px',
         marginRight: '20px'
@@ -54,7 +56,8 @@ const styles = theme => ({
     line: {
         borderRadius: '5px 0 0',
         backgroundColor: '#fbfbfb',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        borderWidth: '0.4px'
     },
     card: {
         marginBottom: '20px'
@@ -63,7 +66,20 @@ const styles = theme => ({
         marginTop: '24px'
     },
     iconContainer: {
+        marginLeft: '8px',
         marginBottom: '25px'
+    },
+    alertContainer: {
+        marginLeft: '9px',
+        marginBottom: '25px'
+    },
+    alertText: {
+        color: '#737373',
+        fontFamily: 'Roboto Medium',
+        fontSize: 15,
+        fontWeight: 500,
+        letterSpacing: 1.06,
+        lineHeight: 20
     }
 })
 
@@ -71,10 +87,10 @@ const styles = theme => ({
 
 class HomeDashboard extends Component {
 
-    constructor(props) {
+    constructor(props){
         super(props);
         this.state = {
-            newUser: true
+            newUser: false
         }
     }
 
@@ -85,28 +101,44 @@ class HomeDashboard extends Component {
 
         return (
             <div>
-                <Header />
+                <Header/>
                 <div className={classes.root} >
-                    {newUser ?
+                    { newUser ? 
                         <React.Fragment>
                             <Typography className={classes.heading} > Hi Robert </Typography>
-                            <Typography className={classes.helper} > Here are the services you can use </Typography>
+                            <Typography className={classes.helper} > Here are the services you can use" </Typography>
                         </React.Fragment> :
-                        <Typography className={classes.heading} > Recently used services </Typography>
+                        <Typography className={classes.heading} style={newUser ? null : {marginBottom:'30px'} } > Recently used services </Typography>
                     }
-                    <div>
-                        <IconContainerTemplate /></div>
+                    <div className={classes.iconContainer} >
+                    <IconContainerTemplate /></div>
                     <hr className={classes.line} />
-                    {newUser ?
-                        <Typography className={classes.subHeading} >Let’s get you started</Typography> :
-                        <Typography className={classes.heading} > Your alerts </Typography>
+                    { newUser ? 
+                        <React.Fragment>
+                            <Typography className={classes.subHeading} >Let’s get you started</Typography>
+                            <div className={classes.cardContainer} >
+                                <div className={classes.card} ><NoDataCards text="Stay on top of your medical bills" src={require('../assets/images/bigBills.svg')} /></div>
+                                <div className={classes.card} ><NoDataCards text="Refer and earn points" src={require('../assets/images/colleagues.svg')}   /></div>
+                            </div>
+                        </React.Fragment>:
+                        <React.Fragment>
+                            <Typography className={classes.heading} > Your alerts </Typography>
+                            <div className={classes.alertContainer} >
+                                <img style={{float:'left',marginRight:'10px'}} src={alert1} />
+                                <Typography>Bill is <b>due</b> by 9 May, 2019</Typography>
+                            </div>
+                            <div className={classes.alertContainer} >
+                                <img style={{float:'left',marginRight:'10px'}} src={alert1} />
+                                <Typography>Bill is <b>due</b> by 9 May, 2019</Typography>
+                            </div>
+                            <div className={classes.alertContainer} >
+                                <img style={{float:'left',marginRight:'10px'}} src={alert1} />
+                                <Typography>Bill is <b>due</b> by 9 May, 2019</Typography>
+                            </div>
+                        </React.Fragment>
                     }
-                    <div className={classes.cardContainer} >
-                        <div className={classes.card} ><NoDataCards text="Stay on top of your medical bills" src={require('../assets/images/bigBills.svg')} /></div>
-                        <div className={classes.card} ><NoDataCards text="Refer and earn points" src={require('../assets/images/colleagues.svg')} /></div>
-                    </div>
                 </div>
-                <Footer activeState={0} />
+                <Footer activeState={1} />
             </div>
         )
     }
