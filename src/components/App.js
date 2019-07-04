@@ -4,7 +4,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
 import AuthGaurd from './Hocs/AuthGaurd';
-import Home from '../pages/Home';
+import Logout from '../pages/Logout';
 import HomeDashboard from '../pages/HomeDashboard'
 import Login from '../pages/Login';
 import Callback from '../pages/Callback';
@@ -59,11 +59,12 @@ function App() {
 			<Router>
 				<Route exact path="/home" component={AuthGaurd(HomeDashboard)} />
 				<Route exact path="/login" component={AuthGaurd(Login)} />
+				<Route exact path="/logout" component={AuthGaurd(Logout)} />
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
 				<Route exact path="/" component={AuthGaurd(LandingPage)} />
 				{/* <HeaderFooterView> */}
-				<Route exact path="/services" component={AuthGaurd(ServicesDashboard)} />
+				<Route exact path="/services" component={ServicesDashboard} />
 				{/* </HeaderFooterView> */}
 			</Router>
 		</ApolloProvider>

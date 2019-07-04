@@ -188,6 +188,25 @@ class Signup extends Component {
                     </Typography>
                     {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField 
+                        name="firstName" 
+                        //error={emailError} 
+                        //errorMsg={ emailErrorMsg } 
+                        textFieldClass={classes.largeTextField} 
+                        label="First Name" 
+                        onFieldChange={this.handleFieldChange} 
+                        //onBlur={this.emailValidation} />
+                        />
+                    <TextField 
+                        name="lastName" 
+                        //error={passwordError} 
+                        //errorMsg={ passwordErrorMsg } 
+                        textFieldClass={classes.largeTextField} 
+                        type="password" 
+                        label="Last Name" 
+                        onFieldChange={this.handleFieldChange} 
+                        //onBlur={this.passwordValidation} />
+                        />
+                    <TextField 
                         name="email" 
                         error={emailError} 
                         errorMsg={ emailErrorMsg } 

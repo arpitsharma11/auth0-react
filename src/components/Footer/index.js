@@ -44,7 +44,7 @@ const Footer = (props) => {
     const handleClick = (event, newValue) => {
         switch (newValue) {
             case 0:
-                history.push('/abc')
+                history.push('/home')
                 break;
             case 1:
                 history.push('/services')
