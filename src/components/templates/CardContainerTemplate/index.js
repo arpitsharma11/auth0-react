@@ -12,8 +12,6 @@ const styles = theme => ({
     root: {
         flexGrow: 1
     }
-
-
 });
 
 
@@ -22,7 +20,7 @@ const IconContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
         <Grid container className={classes.root} spacing={2}>
-            <Grid item sm={3} md={6} lg={6}>
+            <Grid item xs={12}>
                 <Grid container
                     justify="center"
                     spacing={2}>
