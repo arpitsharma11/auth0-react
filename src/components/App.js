@@ -9,8 +9,9 @@ import Login from '../pages/Login';
 import Callback from '../pages/Callback';
 import LandingPage from '../pages/LandingPage';
 import Signup from '../pages/Signup';
-import Test from '../pages/Test';
+//import Test from '../pages/Test';
 import HomePage from '../pages/HomeDashboard';
+import Test from '../components/Test';
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from 'apollo-link-context'
 
@@ -61,9 +62,8 @@ function App() {
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
 				<Route exact path="/" component={AuthGaurd(LandingPage)} />
-				<Route exact path="/test" component={Test} />
 				<Route exact path="/abc" component={HomePage} />
-			</Router>
+				</Router>
 		</ApolloProvider>
 	)
 }
