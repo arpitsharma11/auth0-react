@@ -56,14 +56,13 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-			<Router>
+		j	<Router>
 				<Route exact path="/home" component={AuthGaurd(Home)} />
 				<Route exact path="/login" component={AuthGaurd(Login)} />
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />
 				<Route exact path="/callback" component={AuthGaurd(Callback)} />
 				<Route exact path="/" component={AuthGaurd(LandingPage)} />
-				<Route exact path="/test" component={Test} />
-				<Route exact path="/abc" component={HomeDashboard} />
+				<Route exact path="/dashboard" component={HomeDashboard} />
 				<Route exact path="/services" component={ServicesDashboard} />
 			</Router>
 		</ApolloProvider>

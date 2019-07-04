@@ -8,7 +8,7 @@ const styles = theme => ({
     root: {
         width: '100%',
         bottom: 0,
-        position: 'absolute'
+        position: 'fixed'
         //color: '#004987'
     },
     textActive: {
@@ -44,7 +44,7 @@ const Footer = (props) => {
     const handleClick = (event, newValue) => {
         switch (newValue) {
             case 0:
-                history.push('/abc')
+                history.push('/dashboard')
                 break;
             case 1:
                 history.push('/services')

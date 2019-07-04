@@ -11,7 +11,7 @@ import a from '../../'
 
 const styles = theme => ({
     card: {
-        width: 163,
+        width: '90%',
         height: 66,
         borderRadius: 7,
         backgroundColor: '#00a0df'

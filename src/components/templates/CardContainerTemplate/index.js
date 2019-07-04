@@ -10,22 +10,24 @@ import Cards from '../../Card'
 const styles = theme => ({
 
     root: {
-        flexGrow: 1
+        flexGrow: 1,
+        paddingLeft: 29,
+        paddingRight: 14
     }
 });
 
 
 
-const IconContainerTemplate = (props) => {
+const CardContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
-        <Grid container className={classes.root} spacing={2}>
-            <Grid item xs={12}>
+        <Grid container className={classes.root}>
+            <Grid item xs={12} >
                 <Grid container
                     justify="center"
                     spacing={2}>
                     {serviceList && serviceList.map(value => (
-                        <Grid key={value} item>
+                        <Grid key={value} xs={6} sm={6} spacing={1} item>
                             <Cards title={value.title} src={value.icon} background={value.background} />
                         </Grid>
                     ))}
@@ -40,4 +42,4 @@ const IconContainerTemplate = (props) => {
 //     children: PropTypes.any.isRequired,
 // }
 
-export default withStyles(styles, { withTheme: true })(IconContainerTemplate)
+export default withStyles(styles, { withTheme: true })(CardContainerTemplate)
