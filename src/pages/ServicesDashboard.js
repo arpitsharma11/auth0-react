@@ -6,7 +6,7 @@ import CardContainerTemplate from '../components/templates/CardContainerTemplate
 
 const styles = theme => ({
     root: {
-        marginTop: '24px'
+        marginTop: '30px'
     }
 })
 

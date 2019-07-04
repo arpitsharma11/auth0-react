@@ -44,7 +44,7 @@ const NoDataCards = (props) => {
                 <img style={{ float: 'left' }} src={src} />
                 <span style={{ fontSize: 12, width: 117, float: 'left', marginLeft: 28, textAlign: 'center', marginTop: 11 }}>{text}</span>
                 <Button style={{
-                    float: 'right', width: 77, height: 27, backgroundColor: '#feffff', color: '#003a64', marginTop: 15
+                    float: 'right', width: 77, height: 27, backgroundColor: '#feffff', color: '#003a64', marginTop: 15, border: '1px solid #003a64'
                 }} color="primary" variant="outlined" title="Upload" />
             </CardContent>
         </Card>
