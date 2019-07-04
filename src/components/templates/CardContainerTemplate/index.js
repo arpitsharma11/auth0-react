@@ -16,8 +16,6 @@ const styles = theme => ({
     }
 });
 
-
-
 const CardContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
@@ -25,9 +23,9 @@ const CardContainerTemplate = (props) => {
             <Grid item xs={12} >
                 <Grid container
                     justify="center"
-                    spacing={2}>
+                    spacing={1}>
                     {serviceList && serviceList.map(value => (
-                        <Grid key={value} xs={6} sm={6} spacing={1} item>
+                        <Grid key={value} xs={6} sm={6} item>
                             <Cards title={value.title} src={value.icon} background={value.background} />
                         </Grid>
                     ))}
