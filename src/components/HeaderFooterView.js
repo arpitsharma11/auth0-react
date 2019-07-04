@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-class Test extends Component {
+class HeaderFooterView extends Component {
     render() {
         return (
             <React.Fragment>
                 <Header/>
                 {this.props.children}
-                <Footer/>
+                <Footer activeState={0} />
             </React.Fragment>
         )
     }
 }
 
-export default Test;
+export default HeaderFooterView;
