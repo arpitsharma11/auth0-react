@@ -1,12 +1,19 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
-import MuiButton from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 
 const styles = theme => ({
     badgeColor: {
         backgroundColor: '#DB0032'
+    },
+    caption: {
+        width: 45,
+        height: 34,
+        color: '#000000',
+        fontWeight: 500,
+        textAlign: 'center',
+        fontSize: 13
     }
 
 });
@@ -36,13 +43,17 @@ const IconContainer = (props) => {
 
     return (
         <div>
-            <Badge classes={{ colorPrimary: classes.badgeColor }} badgeContent={notifications} color="primary">
+            <Badge
+                classes={{ colorPrimary: classes.badgeColor }}
+                badgeContent={notifications}
+                color="primary">
                 <img className={classes.icon} src={bgImage} alt="yo" />
-                <img style={{ marginLeft: '-41px' }} src={image} alt="" />
+                <img style={{
+                    marginLeft: '-40px',
+                    marginTop: '5px'
+                }} src={image} alt="" />
             </Badge>
-            <Typography style={{
-                width: 45, height: 34, color: '#000000', fontWeight: 500, textAlign: 'center', fontSize: 13
-            }}>{caption}</Typography>
+            <Typography className={classes.caption}>{caption}</Typography>
         </div>
     )
 };

@@ -16,7 +16,7 @@ export default createMuiTheme({
             light: '#FFBC44',
             dark: 'rgb(93,175,240,0.2)',
             hover: '#FFBC44',
-            contrastText:'white'
+            contrastText: 'white'
         },
         secondary: {
             main: '#004987',
@@ -28,24 +28,9 @@ export default createMuiTheme({
             white: "#FFFFFF",
             black: "rgb(0,0,0)"
         },
-        text: {
-            // primary: '#FFFFFF',
-            // secondary: "#5DAAE0"
-        },
-        divider: "rgb(255,255,255,0.5)",
-        grey: {
-            50: "rgb(255,255,255,0.5)",
-            100: "rgb(255,255,255,0.65)",
-            200: "rgb(255,255,255,0.85)",
-            300: "rgb(255,255,255)",
-            400: "rgb(0,0,0,0.5)",
-            500: "rgb(0,0,0,0.65)",
-            600: "rgb(0,0,0,0.85)",
-
-        },
         background: {
             main: 'radial-gradient(#58687E, #39495E)',
-            paper: '#273D49',
+            paper: '#FFF',
             default: 'rgba(39, 61, 73, .75)',
         },
         cardBackground: {
@@ -70,9 +55,6 @@ export default createMuiTheme({
         'none',
         '0px 3px 6px rgba(0,0,0,.20)'
     ],
-    spacing: {
-        unit: 4
-    },
     typography: {
         useNextVariants: true,
         h1: {
@@ -171,7 +153,7 @@ export default createMuiTheme({
             }
         },
         MuiButton: {
-          
+
         },
         MuiIconButton: {
             root: {

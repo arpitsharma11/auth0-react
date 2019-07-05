@@ -38,10 +38,11 @@ const Footer = (props) => {
         className,
         activeState,
         history,
+        theme,
         ...rest
     } = props
 
-    const handleClick = (event, newValue) => {
+     const handleClick = (event, newValue) => {
         switch (newValue) {
             case 0:
                 history.push('/dashboard')
@@ -55,6 +56,8 @@ const Footer = (props) => {
             case 3:
                 console.log("it")
                 break;
+            default:
+                console.log("error")
         }
     }
 

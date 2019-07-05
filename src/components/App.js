@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from '../utils/Theme';
 import AuthGaurd from './Hocs/AuthGaurd';
 import Home from '../pages/Home';
 import HomeDashboard from '../pages/HomeDashboard'
@@ -36,7 +37,7 @@ if (window.addEventListener) {
 } else {
 	window.attachEvent("onstorage", onStorage);
 };
-  
+
 function onStorage(data) {
 	window.location.reload();
 }
@@ -56,15 +57,19 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-		j	<Router>
-				<Route exact path="/home" component={AuthGaurd(Home)} />
-				<Route exact path="/login" component={AuthGaurd(Login)} />
-				<Route exact path="/signup" component={AuthGaurd(Signup)} />
-				<Route exact path="/callback" component={AuthGaurd(Callback)} />
-				<Route exact path="/" component={AuthGaurd(LandingPage)} />
-				<Route exact path="/dashboard" component={HomeDashboard} />
-				<Route exact path="/services" component={ServicesDashboard} />
+
+			<Router>
+				<MuiThemeProvider theme={theme}>
+					<Route exact path="/home" component={AuthGaurd(Home)} />
+					<Route exact path="/login" component={AuthGaurd(Login)} />
+					<Route exact path="/signup" component={AuthGaurd(Signup)} />
+					<Route exact path="/callback" component={AuthGaurd(Callback)} />
+					<Route exact path="/" component={AuthGaurd(LandingPage)} />
+					<Route exact path="/dashboard" component={HomeDashboard} />
+					<Route exact path="/services" component={ServicesDashboard} />
+				</MuiThemeProvider>
 			</Router>
+
 		</ApolloProvider>
 	)
 }

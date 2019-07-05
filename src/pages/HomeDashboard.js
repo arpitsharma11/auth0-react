@@ -55,7 +55,7 @@ const styles = theme => ({
         marginTop: '24px'
     },
     iconContainer: {
-        marginLeft: '8px',
+        marginLeft: '16px',
         marginBottom: '25px'
     },
     alertContainer: {
@@ -95,7 +95,7 @@ class HomeDashboard extends Component {
                     {newUser ?
                         <React.Fragment>
                             <Typography className={classes.heading} > Hi Robert </Typography>
-                            <Typography className={classes.helper} > Here are the services you can use" </Typography>
+                            <Typography className={classes.helper} > Here are the services you can use </Typography>
                         </React.Fragment> :
                         <Typography className={classes.heading} style={newUser ? null : { marginBottom: '30px' }} > Recently used services </Typography>
                     }

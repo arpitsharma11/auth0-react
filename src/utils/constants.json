@@ -18,7 +18,7 @@
         "notifications": 1
     },
     {
-        "caption": "Second Opinion",
+        "caption": "Second Opinions",
         "bgImage": "/src/assets/images/blue.svg",
         "image": "/src/assets/images/second_opinion.svg",
         "notifications": 0

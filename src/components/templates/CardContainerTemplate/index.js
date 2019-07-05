@@ -5,10 +5,9 @@ import IconContainer from '../../IconContainer';
 
 import Grid from '@material-ui/core/Grid';
 import serviceList from '../../../utils/serviceList.json'
-import Cards from '../../Card'
+import MuiCard from '../../Card'
 
 const styles = theme => ({
-
     root: {
         flexGrow: 1,
         paddingLeft: 29,
@@ -26,7 +25,7 @@ const CardContainerTemplate = (props) => {
                     spacing={1}>
                     {serviceList && serviceList.map(value => (
                         <Grid key={value} xs={6} sm={6} item>
-                            <Cards title={value.title} src={value.icon} background={value.background} />
+                            <MuiCard title={value.title} src={value.icon} background={value.background} />
                         </Grid>
                     ))}
                 </Grid>
