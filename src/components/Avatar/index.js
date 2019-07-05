@@ -4,13 +4,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
 
-});
+})
 
-const Logo = (props) => {
+const Avatar = (props) => {
     return (
         <img src={avatar} />
     )
 }
 
 
-export default withStyles(styles, { withTheme: true })(Logo);
+export default withStyles(styles, { withTheme: true })(Avatar);

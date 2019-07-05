@@ -38,7 +38,7 @@ if (window.addEventListener) {
 } else {
 	window.attachEvent("onstorage", onStorage);
 };
-  
+
 function onStorage(data) {
 	window.location.reload();
 }

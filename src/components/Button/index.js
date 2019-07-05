@@ -60,6 +60,7 @@ const Button = (props) => {
         classes,
         rootClass,
         color,
+        title,
         ...rest
     } = props
 
@@ -77,7 +78,7 @@ const Button = (props) => {
             color={color}
             {...rest}
         >
-            {props.title}
+            {title}
         </MuiButton>
     );
 };

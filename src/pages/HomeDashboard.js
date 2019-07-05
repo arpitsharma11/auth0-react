@@ -12,13 +12,9 @@ import PageTemplate from '../components/templates/PageTemplate';
 import Logo from '../components/Logo'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import IconContainer from '../components/IconContainer';
 import IconContainerTemplate from '../components/templates/IconContainerTemplate';
 import Footer from '../components/Footer';
-import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
-import Cards from '../components/Card'
-import CardContainerTemplate from '../components/templates/CardContainerTemplate';
 import NoDataCards from '../components/NoDataCards';
 import alert1 from '../assets/images/bill_pay.svg';
 import alert2 from '../assets/images/ribbon.svg';
@@ -71,7 +67,7 @@ const styles = theme => ({
         marginTop: '24px'
     },
     iconContainer: {
-        marginLeft: '8px',
+        marginLeft: '16px',
         marginBottom: '25px'
     },
     alertContainer: {
@@ -85,7 +81,7 @@ const styles = theme => ({
         fontWeight: 500,
         maxWidth: 255,
         letterSpacing: 1.06,
-  }
+    }
 })
 
 

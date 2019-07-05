@@ -8,6 +8,7 @@ const styles = theme => ({
     root: {
         marginTop: '115px',
         marginBottom: '74px',
+        marginLeft: '5.1%'
     }
 })
 
