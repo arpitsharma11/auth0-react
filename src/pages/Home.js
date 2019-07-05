@@ -14,7 +14,7 @@ class Home extends Component {
 
     ez = () => {
         console.log(this.props.auth.getAccessToken());
-    }
+        }
 
     render() {
         return (

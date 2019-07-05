@@ -21,7 +21,8 @@ const styles = theme => ({
           width: 67, 
           color: '#fff',
         fontSize: 13,
-        paddingTop: 4 
+        paddingTop: 4,
+        fontWeight:600
     },
     img:{
         float:'right'

@@ -36,6 +36,20 @@ const styles = theme => ({
         paddingTop: 35,
         paddingBottom: 31,
         textAlign: 'center'
+    },
+    referralText: {
+        alignSelf: 'flex-start',
+        marginLeft: '7%',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        opacity: 0.56,
+        color: '#000000',
+        fontFamily: "Roboto Medium",
+        fontSize: '13px',
+        letterSpacing: '0.62px',
+        lineHeight: '18px',
+        fontWeight: 600,
+        marginLeft: '41px'
     }
 });
 
@@ -70,17 +84,17 @@ class Signup extends Component {
     emailValidation = () => {
         const { email } = this.state;
 		if( email === '' ){
-			this.setState({ 
+			this.setState({
                 emailError: true,
-                emailErrorMsg: 'Required' 
+                emailErrorMsg: 'Required'
             })
 			return false
 		}
 		const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 		if (reg.test(email) == false) {
-			this.setState({ 
+			this.setState({
                 emailError: true,
-                emailErrorMsg: 'Invalid email ID' 
+                emailErrorMsg: 'Invalid email ID'
             })
 			return false;
 		}
@@ -92,33 +106,33 @@ class Signup extends Component {
 		if( password === '' ){
 			this.setState({
                 passwordError: true,
-                passwordErrorMsg: 'Required' 
+                passwordErrorMsg: 'Required'
             });
 			return false;
         }
         if( password.length < 8 ){
             this.setState({
                 passwordError: true,
-                passwordErrorMsg: 'Required' 
+                passwordErrorMsg: 'Required'
             });
             return false;
         }
 		return true;
     }
-    
+
     rePasswordValidation = () => {
         const { rePassword } = this.state;
 		if( rePassword === '' ){
             this.setState({
                 rePasswordError: true,
-                rePasswordErrorMsg: 'Required' 
+                rePasswordErrorMsg: 'Required'
             });
 			return false;
         }
         if( rePassword !== this.state.password ){
             this.setState({
                 rePasswordError: true,
-                rePasswordErrorMsg: 'Password does not match' 
+                rePasswordErrorMsg: 'Password does not match'
             });
             return false;
         }
@@ -235,14 +249,20 @@ class Signup extends Component {
                         type="password" label="Confirm password"
                         onFieldChange={this.handleFieldChange}
                         onBlur={this.rePasswordValidation} />
-                    <span>
-                        <TextField textFieldClass={classes.smallTextField} label="Referral Code" onFieldChange={this.handleFieldChange} />
-                        <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
-                    </span>
+                     <Typography variant="body1" className={classes.referralText}>
+                                        Referral Code
+                              </Typography>
+                    <TextField textFieldClass={classes.largeTextField} label="Enter Code" onFieldChange={this.handleFieldChange} />
+                                    <Button variant="text" title="Apply" color="secondary"
+                                        style={{
+                                            marginTop: '-47px',
+                                            marginLeft: '66%'
+
+                                        }} />
                     <Typography variant="body1" className={classes.agreementText}>
                         By tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
-                    <Button 
+                    <Button
                         onClick = { () => this.singUpCall() }
                         title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
                 </PageTemplate>

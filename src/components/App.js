@@ -36,7 +36,7 @@ if (window.addEventListener) {
 } else {
 	window.attachEvent("onstorage", onStorage);
 };
-  
+
 function onStorage(data) {
 	window.location.reload();
 }
@@ -57,7 +57,7 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<Route exact path="/home" component={AuthGaurd(HomeDashboard)} />
+				<Route exact path="/home" component={(HomeDashboard)} />
 				<Route exact path="/login" component={AuthGaurd(Login)} />
 				<Route exact path="/logout" component={AuthGaurd(Logout)} />
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />

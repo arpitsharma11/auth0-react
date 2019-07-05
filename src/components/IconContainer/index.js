@@ -13,7 +13,9 @@ const styles = theme => ({
         color: '#000000',
         fontWeight: 500,
         textAlign: 'center',
-        fontSize: 13
+        fontSize: 13,
+        letterSpacing: 0.62,
+        fontFamily: 'Roboto'
     }
 
 });
