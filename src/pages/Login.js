@@ -15,7 +15,10 @@ const styles = theme => ({
 	largeTextField: {
 		width: 329,
 		paddingBottom: 10
-	}
+	},
+	spinner: {"margin":"100px auto 0","width":"70px","textAlign":"center"},
+	spinnerDiv: {"width":"18px","height":"18px","backgroundColor":"#333","borderRadius":"100%","display":"inline-block","WebkitAnimation":"sk-bouncedelay 1.4s infinite ease-in-out both","animation":"sk-bouncedelay 1.4s infinite ease-in-out both"},
+
 });
 
 function validateEmail(email) {
@@ -38,7 +41,18 @@ class Login extends Component {
 			passwordError: false,
 			emailErrorMsg: '',
 			passwordErrorMsg: '',
-			error: ''
+			error: '',
+			loading: false
+		}
+	}
+
+	componentWillMount() {
+		console.log(window.location.pathname);
+		if( window.location.pathname === '/callback' ){
+			this.props.auth.setSession();
+			this.setState({
+				loading: true
+			})
 		}
 	}
 
@@ -104,7 +118,7 @@ class Login extends Component {
 
 	render() {
 		const { classes, auth } = this.props;
-		const { emailError, passwordError, error, emailErrorMsg, passwordErrorMsg } = this.state;
+		const { emailError, passwordError, error, emailErrorMsg, passwordErrorMsg, loading } = this.state;
 
 		return (
 			<MuiThemeProvider theme={theme}>
@@ -137,7 +151,12 @@ class Login extends Component {
 					<Typography variant="body1" style={{ paddingTop: 10, paddingBottom: 22 }}>
 						Forgot Password?
 					</Typography>
-					<Button onClick={() => this.onLoginClick()} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
+					{ loading ? 
+						<div>
+							Loading
+						</div>:
+						<Button onClick={() => this.onLoginClick()} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
+					}
 				</PageTemplate>
 			</MuiThemeProvider>
 		)

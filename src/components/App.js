@@ -61,7 +61,7 @@ function App() {
 				<Route exact path="/login" component={AuthGaurd(Login)} />
 				<Route exact path="/logout" component={AuthGaurd(Logout)} />
 				<Route exact path="/signup" component={AuthGaurd(Signup)} />
-				<Route exact path="/callback" component={AuthGaurd(Callback)} />
+				<Route exact path="/callback" component={AuthGaurd(Login)} />
 				<Route exact path="/" component={AuthGaurd(LandingPage)} />
 				{/* <HeaderFooterView> */}
 				<Route exact path="/services" component={ServicesDashboard} />

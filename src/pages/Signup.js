@@ -51,6 +51,8 @@ class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            firstName: '',
+            lalstName: '',
             email: '',
             password: '',
             rePassword: '',
@@ -150,7 +152,9 @@ class Signup extends Component {
         console.log('post call');
         const { email, password } = this.state;
         if( this.validation() ){
-            axios.post('http://54.70.201.62:8080/user/signup/',{
+            axios.post('http://localhost:8080/user/signup/',{
+                "firstName": "",
+                "lastName": "",
                 "email": email,
                 "password": password
             })
@@ -183,8 +187,8 @@ class Signup extends Component {
                 <PageTemplate>
                     <Logo />
                     <Typography variant="subtitle1" className={classes.heading}>
-                        Get MPowered with us.
-                        <span className={classes.signUpTitle}>Sign Up Now.</span>
+                        Get Mpowered with us.
+                        <span className={classes.signUpTitle}> Sign Up Now.</span>
                     </Typography>
                     {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
                     <TextField 
@@ -236,7 +240,7 @@ class Signup extends Component {
                         <Button variant="text" title="Apply" color="secondary" style={{ paddingTop: 20 }} />
                     </span>
                     <Typography variant="body1" className={classes.agreementText}>
-                        By Tapping Sign Up you agree on our Terms of Service and Privacy Policy
+                        By tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
                     <Button 
                         onClick = { () => this.singUpCall() }

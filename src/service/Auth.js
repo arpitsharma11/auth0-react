@@ -14,6 +14,7 @@ class AuthService extends Component {
         clientID: 'AcpBichZZwzS4c7neUWodRoxpwpcfVFv',
         responseType: 'token id_token',
         redirectUri: 'http://localhost:3000/callback',
+        scope: 'openid profile email user_metadata',
     });
 
     getAccessToken = () => {
@@ -48,6 +49,7 @@ class AuthService extends Component {
                 password: password,
                 grant_type: 'password',
                 audience: 'http://localhost:8080/graphiql',
+                scope: 'openid profile email user_metadata',
                 //prompt: 'none'
             }, (err,result) => {
                 if(err){
@@ -90,7 +92,9 @@ class AuthService extends Component {
     renewSession() {
         //console.log('check Session callled');
         this.auth0.checkSession({
-            audience: 'http://localhost:8080/graphiql',}, (err, authResult) => {
+            audience: 'http://localhost:8080/graphiql',
+            scope: 'openid profile email user_metadata',
+        }, (err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.setSessionData(authResult);
             } else if (err) {
