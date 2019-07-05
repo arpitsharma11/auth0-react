@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import theme from '../utils/Theme';
+
 import AuthGaurd from './Hocs/AuthGaurd';
-import Home from '../pages/Home';
+import Logout from '../pages/Logout';
 import HomeDashboard from '../pages/HomeDashboard'
 import Login from '../pages/Login';
 import Callback from '../pages/Callback';
 import LandingPage from '../pages/LandingPage';
 import Signup from '../pages/Signup';
-import Test from '../pages/Test';
-import { createHttpLink } from "apollo-link-http";
-import { setContext } from 'apollo-link-context'
+import HeaderFooterView from '../components/HeaderFooterView';
+// import { createHttpLink } from "apollo-link-http";
+// import { setContext } from 'apollo-link-context'
 import ServicesDashboard from '../pages/ServicesDashboard';
 
 /*const httpLink = createHttpLink({ uri: "http://172.16.17.247:8080/graphql" });
@@ -37,7 +36,7 @@ if (window.addEventListener) {
 } else {
 	window.attachEvent("onstorage", onStorage);
 };
-
+  
 function onStorage(data) {
 	window.location.reload();
 }
@@ -57,19 +56,17 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-
 			<Router>
-				<MuiThemeProvider theme={theme}>
-					<Route exact path="/home" component={AuthGaurd(Home)} />
-					<Route exact path="/login" component={AuthGaurd(Login)} />
-					<Route exact path="/signup" component={AuthGaurd(Signup)} />
-					<Route exact path="/callback" component={AuthGaurd(Callback)} />
-					<Route exact path="/" component={AuthGaurd(LandingPage)} />
-					<Route exact path="/dashboard" component={HomeDashboard} />
-					<Route exact path="/services" component={ServicesDashboard} />
-				</MuiThemeProvider>
+				<Route exact path="/home" component={AuthGaurd(HomeDashboard)} />
+				<Route exact path="/login" component={AuthGaurd(Login)} />
+				<Route exact path="/logout" component={AuthGaurd(Logout)} />
+				<Route exact path="/signup" component={AuthGaurd(Signup)} />
+				<Route exact path="/callback" component={AuthGaurd(Login)} />
+				<Route exact path="/" component={AuthGaurd(LandingPage)} />
+				{/* <HeaderFooterView> */}
+				<Route exact path="/services" component={ServicesDashboard} />
+				{/* </HeaderFooterView> */}
 			</Router>
-
 		</ApolloProvider>
 	)
 }

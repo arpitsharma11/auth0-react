@@ -9,7 +9,11 @@ const styles = theme => ({
     root: {
         height: '91px',
         backgroundColor: '#004987',
-        display: 'flex'
+        display: 'flex',
+        position: 'fixed',
+        zIndex: 500,
+        top: 0,
+        width: '100%'
     },
     avatar: {
         width: '43px',

@@ -12,18 +12,18 @@ import alert3 from '../assets/images/calendar.svg';
 
 const styles = theme => ({
     root: {
-        marginTop: '24px',
+        marginTop: '115px',
+        marginBottom: '74px',
         marginLeft: '20px',
         marginRight: '20px'
     },
     heading: {
         color: '#000000',
-        //font-family: Roboto;
         fontSize: '17px',
         fontWeight: '900',
         letterSpacing: '1.2px',
         lineHeight: '22px',
-        marginBottom: '35px'
+        marginBottom: '7px'
     },
     helper: {
         opacity: 0.56,
@@ -73,7 +73,6 @@ const styles = theme => ({
 })
 
 
-
 class HomeDashboard extends Component {
 
     constructor(props) {
@@ -97,7 +96,7 @@ class HomeDashboard extends Component {
                             <Typography className={classes.heading} > Hi Robert </Typography>
                             <Typography className={classes.helper} > Here are the services you can use </Typography>
                         </React.Fragment> :
-                        <Typography className={classes.heading} style={newUser ? null : { marginBottom: '30px' }} > Recently used services </Typography>
+                        <Typography className={classes.heading} style={newUser ? null : { marginBottom: '41px' }} > Recently used services </Typography>
                     }
                     <div className={classes.iconContainer} >
                         <IconContainerTemplate /></div>

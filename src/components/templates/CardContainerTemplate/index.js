@@ -5,27 +5,27 @@ import IconContainer from '../../IconContainer';
 
 import Grid from '@material-ui/core/Grid';
 import serviceList from '../../../utils/serviceList.json'
-import MuiCard from '../../Card'
+import Cards from '../../Card'
 
 const styles = theme => ({
+
     root: {
-        flexGrow: 1,
-        paddingLeft: 29,
-        paddingRight: 14
+        flexGrow: 1
     }
 });
 
-const CardContainerTemplate = (props) => {
+
+
+const IconContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
         <Grid container className={classes.root}>
-            <Grid item xs={12} >
+            <Grid item xs={12}>
                 <Grid container
-                    justify="center"
-                    spacing={1}>
+                    justify="center">
                     {serviceList && serviceList.map(value => (
-                        <Grid key={value} xs={6} sm={6} item>
-                            <MuiCard title={value.title} src={value.icon} background={value.background} />
+                        <Grid style={{paddingRight : '2.9%',paddingBottom: '1.9%'}} key={value} item>
+                            <Cards title={value.title} src={value.icon} background={value.background} />
                         </Grid>
                     ))}
                 </Grid>
@@ -39,4 +39,4 @@ const CardContainerTemplate = (props) => {
 //     children: PropTypes.any.isRequired,
 // }
 
-export default withStyles(styles, { withTheme: true })(CardContainerTemplate)
+export default withStyles(styles, { withTheme: true })(IconContainerTemplate)

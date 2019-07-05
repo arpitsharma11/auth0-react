@@ -5,7 +5,9 @@ import MUITextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import clsx from 'classnames';
 
-import WarningIcon from '../../assets/images/exclamation-sign-in-a-circle.png'
+import WarningIcon from '../../assets/images/exclamation-sign-in-a-circle.png';
+import ShowPasswordIcon from '../../assets/images/password_show.svg';
+
 
 const styles = theme => ({
 
@@ -66,6 +68,7 @@ const TextField = (props) => {
         defaultValue,
         maxLength,
         textFieldClass,
+        showPassword,
         ...rest
     } = props;
 
@@ -85,11 +88,16 @@ const TextField = (props) => {
             defaultValue={defaultValue}
             InputProps={{
                 className: `${classes.input} `,
-                endAdornment: error ? (
-                    <InputAdornment position="end">
-                      <img src={WarningIcon} />
+                // endAdornment: error ? (
+                //     <InputAdornment position="end">
+                //       <img src={WarningIcon} />
+                //     </InputAdornment>
+                // ): null,
+                endAdornment: type === 'password' ? (
+                    <InputAdornment position='end'>
+                        <img onClick={ () => console.log('Show password') } src={ShowPasswordIcon} />
                     </InputAdornment>
-                ): null,
+                ) : null
             }}
              InputLabelProps={{
                 classes: {

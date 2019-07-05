@@ -38,14 +38,13 @@ const Footer = (props) => {
         className,
         activeState,
         history,
-        theme,
         ...rest
     } = props
 
-     const handleClick = (event, newValue) => {
+    const handleClick = (event, newValue) => {
         switch (newValue) {
             case 0:
-                history.push('/dashboard')
+                history.push('/home')
                 break;
             case 1:
                 history.push('/services')
@@ -56,8 +55,6 @@ const Footer = (props) => {
             case 3:
                 console.log("it")
                 break;
-            default:
-                console.log("error")
         }
     }
 
@@ -71,13 +68,13 @@ const Footer = (props) => {
                 <BottomNavigationAction label="Home" classes={{ label: classes.textActive }} icon={<img src={require("../../assets/images/home.svg")} />} /> :
                 <BottomNavigationAction label="Home" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/home_light.svg")} />} />}
             {activeState === 1 ?
-                <BottomNavigationAction label="Services" className={classes.textActive} icon={<img src={require("../../assets/images/home.svg")} />} /> :
-                <BottomNavigationAction label="Services" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/home_light.svg")} />} />}
+                <BottomNavigationAction label="Services" className={classes.textActive} icon={<img src={require("../../assets/images/services.svg")} />} /> :
+                <BottomNavigationAction label="Services" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/services_light.svg")} />} />}
             {activeState === 2 ?
                 <BottomNavigationAction label="Circles" className={classes.textActive} icon={<img src={require("../../assets/images/home.svg")} />} /> :
                 <BottomNavigationAction label="Circles" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/circles_light.svg")} />} />}
             {activeState === 3 ?
-                <BottomNavigationAction label="Utilities" className={classes.textActive} icon={<img src={require("../../assets/images/home.svg")} />} /> :
+                <BottomNavigationAction label="Utilities" className={classes.textActive} icon={<img src={require("../../assets/images/utilities.svg")} />} /> :
                 <BottomNavigationAction label="Utilities" classes={{ label: classes.textInactive }} icon={<img src={require("../../assets/images/utilities_light.svg")} />} />}
         </BottomNavigation>
     )
