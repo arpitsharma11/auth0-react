@@ -96,7 +96,7 @@ const TextField = (props) => {
                                     <img src={WarningIcon} />
                                 </InputAdornment>
                                 <InputAdornment position="end">
-                                    <img src={ShowPasswordIcon} />
+                                    <img onClick={ () => props.onShowPassword() } src={ShowPasswordIcon} />
                                 </InputAdornment>
                             </React.Fragment> :
                             <InputAdornment position="end">
@@ -107,12 +107,7 @@ const TextField = (props) => {
                         <InputAdornment position="end">
                             <img src={WarningIcon} />
                         </InputAdornment>: null
-                ),
-                // endAdornment: type === 'password' ? (
-                //     <InputAdornment position='end'>
-                //         <img onClick={ () => console.log('Show password') } src={ShowPasswordIcon} />
-                //     </InputAdornment>
-                // ) : null
+                )
             }}
              InputLabelProps={{
                 classes: {

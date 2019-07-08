@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {compose} from 'redux';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline'
-
-import theme from '../utils/Theme';
-import Button from '../components/Button';
-import TextField from '../components/TextField'
-import PageTemplate from '../components/templates/PageTemplate';
-import Logo from '../components/Logo'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import IconContainerTemplate from '../components/templates/IconContainerTemplate';
@@ -20,7 +11,7 @@ import alert1 from '../assets/images/bill_pay.svg';
 import alert2 from '../assets/images/ribbon.svg';
 import alert3 from '../assets/images/calendar.svg';
 import * as actions from '../actions';
-
+import Profile from '../components/Profile';
 
 const styles = theme => ({
     root: {
@@ -105,7 +96,7 @@ class HomeDashboard extends Component {
                 <div className={classes.root} >
                     {newUser ?
                         <React.Fragment>
-                            <Typography className={classes.heading} > Hi { auth.getName() } </Typography>
+                            <Typography className={classes.heading} > Hi <Profile /> </Typography>
                             <Typography className={classes.helper} > Here are the services you can use" </Typography>
                         </React.Fragment> :
                         <Typography className={classes.heading} style={newUser ? null : { marginBottom: '41px' }} > Recently used services </Typography>

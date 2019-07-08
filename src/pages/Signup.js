@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from '../utils/Theme';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '../components/TextField'
+import TextField from '../components/TextField';
 import PageTemplate from '../components/templates/PageTemplate';
-import Logo from '../components/Logo'
+import Logo from '../components/Logo';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import axios from 'axios';
 
@@ -90,7 +87,9 @@ class Signup extends Component {
             lastNameErrorMsg: '',
             emailErrorMsg: '',
             passwordErrorMsg: '',
-            rePasswordErrorMsg: ''
+            rePasswordErrorMsg: '',
+            showPassword: false,
+            showPasswordRe: false
         }
     }
 
@@ -188,11 +187,11 @@ class Signup extends Component {
 
     singUpCall = () => {
         //console.log('post call');
-        const { email, password } = this.state;
+        const { email, password, firstName, lastName } = this.state;
         if( this.validation() ){
-            /*axios.post('http://localhost:8080/user/signup/',{
-                "firstName": "",
-                "lastName": "",
+            axios.post('http://localhost:8080/user/signup/',{
+                "firstName": firstName,
+                "lastName": lastName,
                 "email": email,
                 "password": password
             })
@@ -202,7 +201,7 @@ class Signup extends Component {
             })
             .catch((error) => {
                 console.log(error);
-            })*/
+            })
         }
     }
 
@@ -215,6 +214,12 @@ class Signup extends Component {
             userError: true
         })
     }
+
+    showPassword = (type) => {
+		this.setState({
+			['showPassword' + type]: !this.state['showPassword' + type]
+		});
+	}
 
     render() {
         const { classes, auth } = this.props;
@@ -233,7 +238,9 @@ class Signup extends Component {
                 emailErrorMsg, 
                 rePasswordErrorMsg,
                 firstNameErrorMsg,
-                lastNameErrorMsg 
+                lastNameErrorMsg ,
+                showPassword,
+                showPasswordRe
             } = this.state;
 
         return (
@@ -286,18 +293,25 @@ class Signup extends Component {
                         error={passwordError}
                         errorMsg={ passwordErrorMsg }
                         textFieldClass={classes.largeTextField}
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         label="Password"
                         onFieldChange={this.handleFieldChange}
-                        onBlur={this.passwordValidation} />
+                        onBlur={this.passwordValidation} 
+						onShowPassword={ () => this.showPassword('') }
+						showPassword={true}
+                    />
                     <TextField
                         name="rePassword"
                         error={rePasswordError}
                         errorMsg={ rePasswordErrorMsg }
                         textFieldClass={classes.largeTextField}
-                        type="password" label="Confirm password"
+                        type={showPasswordRe ? 'text' : 'password'}
+                        label="Confirm password"
                         onFieldChange={this.handleFieldChange}
-                        onBlur={this.rePasswordValidation} />
+                        onBlur={this.rePasswordValidation}
+						onShowPassword={ () => this.showPassword( 'Re' ) }
+						showPassword={true}
+                    />
                      {/* <Typography variant="body1" className={classes.referralText}>
                                         Referral Code
                               </Typography>

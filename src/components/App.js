@@ -45,7 +45,7 @@ function onStorage(data) {
 
 
 const client = new ApolloClient({
-	uri: "http://172.16.17.247:8080/graphql",
+	uri: "http://localhost:8080/graphql",
 	request: operation => {
 		operation.setContext({
 			headers: {

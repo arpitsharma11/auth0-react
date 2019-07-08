@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from '../../config/auth0_variables';
-console.log(AUTH_CONFIG);
+
 class AuthService extends Component {
 
     accessToken;
