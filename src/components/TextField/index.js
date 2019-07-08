@@ -95,9 +95,6 @@ const TextField = (props) => {
                                 <InputAdornment position="end">
                                     <img src={WarningIcon} />
                                 </InputAdornment>
-                                <InputAdornment position="end">
-                                    <img onClick={ () => props.onShowPassword() } src={ShowPasswordIcon} />
-                                </InputAdornment>
                             </React.Fragment> :
                             <InputAdornment position="end">
                                 <img onClick={ () => props.onShowPassword() } src={ShowPasswordIcon} />

@@ -96,8 +96,8 @@ class HomeDashboard extends Component {
                 <div className={classes.root} >
                     {newUser ?
                         <React.Fragment>
-                            <Typography className={classes.heading} > Hi <Profile /> </Typography>
-                            <Typography className={classes.helper} > Here are the services you can use" </Typography>
+                            <Typography className={classes.heading} > Hi </Typography>
+                            <Typography className={classes.helper} > Here are the services you can use </Typography>
                         </React.Fragment> :
                         <Typography className={classes.heading} style={newUser ? null : { marginBottom: '41px' }} > Recently used services </Typography>
                     }

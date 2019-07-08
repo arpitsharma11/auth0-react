@@ -45,7 +45,7 @@ function onStorage(data) {
 
 
 const client = new ApolloClient({
-	uri: "http://localhost:8080/graphql",
+	uri: "http://54.70.201.62:8080/graphql",
 	request: operation => {
 		operation.setContext({
 			headers: {
@@ -64,7 +64,7 @@ function App() {
 					<Route exact path="/login" component={AuthGaurd(Login)} />
 					<Route exact path="/logout" component={AuthGaurd(Logout)} />
 					<Route exact path="/signup" component={AuthGaurd(Signup)} />
-					<Route exact path="/callback" component={AuthGaurd(Login)} />
+					<Route exact path="/callback" component={AuthGaurd(Callback)} />
 					<Route exact path="/" component={AuthGaurd(LandingPage)} />
 					{/* <HeaderFooterView> */}
 					<Route exact path="/services" component={ServicesDashboard} />
