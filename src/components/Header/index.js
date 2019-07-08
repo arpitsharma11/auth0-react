@@ -19,7 +19,7 @@ const styles = theme => ({
         width: '43px',
         //height: '50px',
         marginLeft: '8px',
-        marginRight: '5px',
+        marginRight: '-4px',
         marginTop: '44px'
        // float: 'left',
     },

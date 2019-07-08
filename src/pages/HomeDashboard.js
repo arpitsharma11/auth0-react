@@ -31,8 +31,7 @@ const styles = theme => ({
     helper: {
         opacity: 0.56,
         color: '#000000',
-        fontFamily: "Roboto Light",
-        fontSize: '13px',
+        fontSize: '12px',
         fontWeight: 300,
         letterSpacing: '0.62px',
         lineHeight: '18px',
@@ -63,7 +62,8 @@ const styles = theme => ({
     },
     alertContainer: {
         marginLeft: '9px',
-        marginBottom: '25px'
+        marginBottom: '25px',
+        marginTop: '29px'
     },
     alertText: {
         color: '#737373',
