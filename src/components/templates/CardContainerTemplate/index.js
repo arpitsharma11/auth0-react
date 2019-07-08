@@ -19,16 +19,15 @@ const styles = theme => ({
 const IconContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
-                <Grid container
+        <Grid container
                     className={classes.root}
                     >
                     {serviceList && serviceList.map(value => (
-                        <Grid style={{marginRight:'2.9%',marginTop:'1.9%'}} key={value} item>
+                        <Grid style={{width: '43.7%', marginRight:'2.9%',marginTop:'1.9%'}} key={value} item>
                             <Cards title={value.title} src={value.icon} background={value.background} />
                         </Grid>
                     ))}
                 </Grid>
-
     )
 }
 

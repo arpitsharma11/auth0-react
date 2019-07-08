@@ -88,16 +88,31 @@ const TextField = (props) => {
             defaultValue={defaultValue}
             InputProps={{
                 className: `${classes.input} `,
-                // endAdornment: error ? (
-                //     <InputAdornment position="end">
-                //       <img src={WarningIcon} />
+                endAdornment: (
+                    props.showPassword ? 
+                        error ?
+                            <React.Fragment>
+                                <InputAdornment position="end">
+                                    <img src={WarningIcon} />
+                                </InputAdornment>
+                                <InputAdornment position="end">
+                                    <img src={ShowPasswordIcon} />
+                                </InputAdornment>
+                            </React.Fragment> :
+                            <InputAdornment position="end">
+                                <img onClick={ () => props.onShowPassword() } src={ShowPasswordIcon} />
+                            </InputAdornment>
+                        :
+                        error ?
+                        <InputAdornment position="end">
+                            <img src={WarningIcon} />
+                        </InputAdornment>: null
+                ),
+                // endAdornment: type === 'password' ? (
+                //     <InputAdornment position='end'>
+                //         <img onClick={ () => console.log('Show password') } src={ShowPasswordIcon} />
                 //     </InputAdornment>
-                // ): null,
-                endAdornment: type === 'password' ? (
-                    <InputAdornment position='end'>
-                        <img onClick={ () => console.log('Show password') } src={ShowPasswordIcon} />
-                    </InputAdornment>
-                ) : null
+                // ) : null
             }}
              InputLabelProps={{
                 classes: {
