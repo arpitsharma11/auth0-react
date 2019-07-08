@@ -50,7 +50,16 @@ const styles = theme => ({
         lineHeight: '18px',
         fontWeight: 600,
         marginLeft: '41px'
-    }
+    },
+	dontHave: {
+		opacity: '0.34',
+		color: '#000000',
+		fontSize: '12px',
+		letterSpacing: '0.47px',
+		lineHeight: '16px',
+		textAlign: 'center',
+		paddingTop: '16px'
+	}
 });
 
 const CREATE_USER = gql`
@@ -66,19 +75,35 @@ class Signup extends Component {
         super(props);
         this.state = {
             firstName: '',
-            lalstName: '',
+            lastName: '',
             email: '',
             password: '',
             rePassword: '',
+            firstNameError: '',
+            lastNameError: '',
             emailError: false,
             passwordError: false,
             rePasswordError: false,
             auth0Id: '',
             userError: false,
+            firstNameErrorMsg: '',
+            lastNameErrorMsg: '',
             emailErrorMsg: '',
             passwordErrorMsg: '',
             rePasswordErrorMsg: ''
         }
+    }
+
+    firstNameValidation = () => {
+        const { firstName } = this.state;
+		if( firstName === '' ){
+			this.setState({
+                firstNameError: true,
+                firstNameErrorMsg: 'First Name Required'
+            })
+			return false
+		}
+		return true;
     }
 
     emailValidation = () => {
@@ -86,7 +111,7 @@ class Signup extends Component {
 		if( email === '' ){
 			this.setState({
                 emailError: true,
-                emailErrorMsg: 'Required'
+                emailErrorMsg: 'Email Required'
             })
 			return false
 		}
@@ -106,14 +131,14 @@ class Signup extends Component {
 		if( password === '' ){
 			this.setState({
                 passwordError: true,
-                passwordErrorMsg: 'Required'
+                passwordErrorMsg: 'Password Required'
             });
 			return false;
         }
         if( password.length < 8 ){
             this.setState({
                 passwordError: true,
-                passwordErrorMsg: 'Required'
+                passwordErrorMsg: 'Password lenght needs to be 8 or more than 8 characters.'
             });
             return false;
         }
@@ -125,7 +150,7 @@ class Signup extends Component {
 		if( rePassword === '' ){
             this.setState({
                 rePasswordError: true,
-                rePasswordErrorMsg: 'Required'
+                rePasswordErrorMsg: 'Repassword Required'
             });
 			return false;
         }
@@ -149,10 +174,9 @@ class Signup extends Component {
     }
 
     validation = () => {
-        const { email,
-            password,
-            rePassword } = this.state;
         let error = true;
+        if( !this.firstNameValidation() )
+            error = false;
         if( !this.emailValidation() )
             error = false;
         if( !this.passwordValidation() )
@@ -163,10 +187,10 @@ class Signup extends Component {
     }
 
     singUpCall = () => {
-        console.log('post call');
+        //console.log('post call');
         const { email, password } = this.state;
         if( this.validation() ){
-            axios.post('http://localhost:8080/user/signup/',{
+            /*axios.post('http://localhost:8080/user/signup/',{
                 "firstName": "",
                 "lastName": "",
                 "email": email,
@@ -178,7 +202,7 @@ class Signup extends Component {
             })
             .catch((error) => {
                 console.log(error);
-            })
+            })*/
         }
     }
 
@@ -194,32 +218,57 @@ class Signup extends Component {
 
     render() {
         const { classes, auth } = this.props;
-        const { emailError, passwordError, rePasswordError, userC, auth0Id, email, userError, password, passwordErrorMsg, emailErrorMsg, rePasswordErrorMsg } = this.state;
+        const { 
+                emailError, 
+                passwordError, 
+                rePasswordError, 
+                firstNameError,
+                lastNameError,
+                userC, 
+                auth0Id, 
+                email, 
+                userError, 
+                password, 
+                passwordErrorMsg, 
+                emailErrorMsg, 
+                rePasswordErrorMsg,
+                firstNameErrorMsg,
+                lastNameErrorMsg 
+            } = this.state;
 
         return (
             <MuiThemeProvider theme={theme}>
                 <PageTemplate>
                     <Logo />
-                    <Typography variant="subtitle1" className={classes.heading}>
+                    <Typography 
+                        variant="subtitle1" 
+                        className={classes.heading}
+                    >
                         Get Mpowered with us.
                         <span className={classes.signUpTitle}> Sign Up Now.</span>
                     </Typography>
-                    {userError && <Typography style={{ color: 'red' }} variant="body1" >User already exists</Typography>}
+                    { userError && 
+                        <Typography 
+                            style={{ color: 'red' }} 
+                            variant="body1" 
+                        >
+                            User already exists
+                        </Typography>
+                    }
                     <TextField
                         name="firstName"
-                        //error={emailError}
-                        //errorMsg={ emailErrorMsg }
+                        error={firstNameError}
+                        errorMsg={ firstNameErrorMsg }
                         textFieldClass={classes.largeTextField}
                         label="First Name"
                         onFieldChange={this.handleFieldChange}
-                        //onBlur={this.emailValidation} />
-                        />
+                    />
                     <TextField
                         name="lastName"
                         //error={passwordError}
                         //errorMsg={ passwordErrorMsg }
                         textFieldClass={classes.largeTextField}
-                        type="password"
+                        type="text"
                         label="Last Name"
                         onFieldChange={this.handleFieldChange}
                         //onBlur={this.passwordValidation} />
@@ -249,7 +298,7 @@ class Signup extends Component {
                         type="password" label="Confirm password"
                         onFieldChange={this.handleFieldChange}
                         onBlur={this.rePasswordValidation} />
-                     <Typography variant="body1" className={classes.referralText}>
+                     {/* <Typography variant="body1" className={classes.referralText}>
                                         Referral Code
                               </Typography>
                     <TextField textFieldClass={classes.largeTextField} label="Enter Code" onFieldChange={this.handleFieldChange} />
@@ -258,13 +307,33 @@ class Signup extends Component {
                                             marginTop: '-47px',
                                             marginLeft: '66%'
 
-                                        }} />
-                    <Typography variant="body1" className={classes.agreementText}>
+                                        }} /> */}
+                    <Typography 
+                        variant="body1" 
+                        className={classes.agreementText}
+                    >
                         By tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
                     <Button
                         onClick = { () => this.singUpCall() }
-                        title="Sign Up" color='primary' variant='contained' rootClass={classes.button} size="large" />
+                        title="Sign Up" 
+                        color='primary' 
+                        variant='contained' 
+                        rootClass={classes.button} 
+                        size="large" 
+                    />
+                    <Typography 
+                        className={classes.dontHave} 
+                        variant="body1" 
+                    >
+                        Already have a account? 
+                        <span 
+                            style={{ color: '#F7B500'  }}
+                            onClick= { () => this.props.history.push('/login') }
+                        >
+                            Login
+                        </span> 
+                    </Typography>
                 </PageTemplate>
             </MuiThemeProvider>
         )

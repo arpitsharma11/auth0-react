@@ -16,9 +16,15 @@ const styles = theme => ({
 		width: 329,
 		paddingBottom: 10
 	},
-	spinner: {"margin":"100px auto 0","width":"70px","textAlign":"center"},
-	spinnerDiv: {"width":"18px","height":"18px","backgroundColor":"#333","borderRadius":"100%","display":"inline-block","WebkitAnimation":"sk-bouncedelay 1.4s infinite ease-in-out both","animation":"sk-bouncedelay 1.4s infinite ease-in-out both"},
-
+	dontHave: {
+		opacity: '0.34',
+		color: '#000000',
+		fontSize: '12px',
+		letterSpacing: '0.47px',
+		lineHeight: '16px',
+		textAlign: 'center',
+		paddingTop: '16px'
+	}
 });
 
 function validateEmail(email) {
@@ -42,7 +48,8 @@ class Login extends Component {
 			emailErrorMsg: '',
 			passwordErrorMsg: '',
 			error: '',
-			loading: false
+			loading: false,
+			showPassword: false
 		}
 	}
 
@@ -70,7 +77,7 @@ class Login extends Component {
 		if( email === '' ){
 			this.setState({ 
 				emailError: true,
-				emailErrorMsg: 'Required' 
+				emailErrorMsg: 'Email Required' 
 			});
 			return false
 		}
@@ -78,7 +85,7 @@ class Login extends Component {
 		if (reg.test(email) == false) {
 			this.setState({ 
 				emailError: true,
-				emailErrorMsg: 'Invalid email ID' 
+				emailErrorMsg: 'Invalid email' 
 			})
 			return false;
 		}
@@ -90,7 +97,7 @@ class Login extends Component {
 		if( password === '' ){
 			this.setState({ 
 				passwordError: true,
-				passwordErrorMsg: 'Required' 
+				passwordErrorMsg: 'Password Required' 
 			});
 			return false;
 		}
@@ -116,21 +123,47 @@ class Login extends Component {
 				})
 	}
 
+	showPassword = () => {
+		this.setState({
+			showPassword: !this.state.showPassword
+		});
+	}
+
 	render() {
 		const { classes, auth } = this.props;
-		const { emailError, passwordError, error, emailErrorMsg, passwordErrorMsg, loading } = this.state;
+		const { 
+				emailError, 
+				passwordError, 
+				error, 
+				emailErrorMsg, 
+				passwordErrorMsg, 
+				loading,
+				showPassword
+			} = this.state;
 
 		return (
 			<MuiThemeProvider theme={theme}>
 				<PageTemplate>
 					<Logo />
-					<Typography variant="subtitle1" style={{ paddingTop: 41 }}>
+					<Typography 
+						variant="subtitle1" 
+						style={{ paddingTop: 41 }}
+					>
 						Welcome Back!
 					</Typography>
-					<Typography variant="subtitle2" style={{ paddingBottom: 35 }}>
+					<Typography 
+						variant="subtitle2" 
+						style={{ paddingBottom: 35 }}
+					>
 						Please Log In to continue
 					</Typography>
-					{error && <Typography style={{ color: 'red' }} variant="body1" >{error}</Typography>}
+					{	error && 
+						<Typography 
+							style={{ color: 'red' }} 
+							variant="body1" 
+						>
+							{ error }
+						</Typography>}
 					<TextField 	
 						//onFocus={this.handleFocus}
 						onBlur={this.emailValidation} 
@@ -143,20 +176,45 @@ class Login extends Component {
 						onBlur={this.passwordValidation}
 						textFieldClass={classes.largeTextField} 
 						name="password" 
-						type="password" 
+						type={showPassword ? 'text' : 'password'} 
 						label="Password" 
 						error={passwordError} 
 						errorMsg={passwordErrorMsg}  
-						onFieldChange={this.handleFieldChange} />
-					<Typography variant="body1" style={{ paddingTop: 10, paddingBottom: 22 }}>
+						onFieldChange={this.handleFieldChange}
+						onShowPassword={ this.showPassword }
+						showPassword={true}
+					/>
+					<Typography 
+						variant="body1" 
+						style={{ paddingTop: 10, paddingBottom: 22 }}
+					>
 						Forgot Password?
 					</Typography>
 					{ loading ? 
 						<div>
 							Loading
 						</div>:
-						<Button onClick={() => this.onLoginClick()} title="Log In" color='primary' variant='contained' rootClass={classes.button} size="large" />
+						<Button 
+							onClick={() => this.onLoginClick()} 
+							title="Log In" 
+							color='primary' 
+							variant='contained' 
+							rootClass={classes.button} 
+							size="large" 
+						/>
 					}
+					<Typography 
+						className={classes.dontHave} 
+						variant="body1" 
+					>
+						Don’t have an account? 
+						<span 
+							style={{ color: '#F7B500'  }} 
+                            onClick= { () => this.props.history.push('/signup') }
+						>	
+							Sign up
+						</span> 
+					</Typography>
 				</PageTemplate>
 			</MuiThemeProvider>
 		)

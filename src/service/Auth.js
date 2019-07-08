@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import auth0 from 'auth0-js';
-
-
+import { AUTH_CONFIG } from '../../config/auth0_variables';
+console.log(AUTH_CONFIG);
 class AuthService extends Component {
 
     accessToken;
     idToken;
     expiresAt;
+    name;
+    auth0Id;
     //auth0Id;
 
     auth0 = new auth0.WebAuth({
-        domain: 'dev-rx0xlk6h.auth0.com',
-        clientID: 'AcpBichZZwzS4c7neUWodRoxpwpcfVFv',
+        domain: AUTH_CONFIG.domain,
+        clientID: AUTH_CONFIG.clientID,
         responseType: 'token id_token',
         redirectUri: 'http://localhost:3000/callback',
-        scope: 'openid profile email user_metadata',
+        scope: AUTH_CONFIG.scope,
     });
 
     getAccessToken = () => {
@@ -27,6 +29,10 @@ class AuthService extends Component {
 
     getExpireIn = () => {
         return this.expiresAt;
+    }
+
+    getName = () => {
+        return this.name;
     }
 
     /*getAuth0Id = () => {
@@ -48,8 +54,8 @@ class AuthService extends Component {
                 username: email,
                 password: password,
                 grant_type: 'password',
-                audience: 'http://localhost:8080/graphiql',
-                scope: 'openid profile email user_metadata',
+                audience: AUTH_CONFIG.audience,
+                scope: AUTH_CONFIG.scope,
                 //prompt: 'none'
             }, (err,result) => {
                 if(err){
@@ -86,14 +92,16 @@ class AuthService extends Component {
        // console.log("Auth Check", new Date().getTime() < expiresAt);
         this.accessToken = authResult.accessToken;
         this.idToken = authResult.idToken;
+        this.name = authResult.idTokenPayload.name;
+        console.log('name',authResult.idTokenPayload.name);
         //this.expiresAt = expiresAt;
     }
 
     renewSession() {
         //console.log('check Session callled');
         this.auth0.checkSession({
-            audience: 'http://localhost:8080/graphiql',
-            scope: 'openid profile email user_metadata',
+            audience: AUTH_CONFIG.audience,
+            scope: AUTH_CONFIG.scope,
         }, (err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.setSessionData(authResult);
