@@ -16,7 +16,7 @@ class AuthService extends Component {
         domain: AUTH_CONFIG.domain,
         clientID: AUTH_CONFIG.clientID,
         responseType: 'token id_token',
-        redirectUri: 'http://localhost:3000/callback',
+        redirectUri: 'http://52.13.107.85/callback',
         scope: AUTH_CONFIG.scope,
     });
 
