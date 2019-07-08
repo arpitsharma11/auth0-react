@@ -1,11 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
 import IconContainer from '../../IconContainer';
 
 import Grid from '@material-ui/core/Grid';
 import data from '../../../utils/constants.json'
-console.log('data', data);
+
 
 const styles = theme => ({
 
@@ -22,11 +21,11 @@ const styles = theme => ({
 
 
 const IconContainerTemplate = (props) => {
-    const { classes, children } = props;
+    const { classes } = props;
     return (
         <Grid container className={classes.root} spacing={2}>
-            {data && data.map(value => (
-                <Grid item xs={3} key={value}>
+            {data && data.map((value, index) => (
+                <Grid item xs={3} key={index}>
                     <IconContainer caption={value.caption} bgImage={value.bgImage} image={value.image} notifications={value.notifications} />
                 </Grid>
             ))}

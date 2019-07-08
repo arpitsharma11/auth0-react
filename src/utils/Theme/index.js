@@ -51,10 +51,7 @@ export default createMuiTheme({
             main: '#273d49'
         }
     },
-    shadows: [
-        'none',
-        '0px 3px 6px rgba(0,0,0,.20)'
-    ],
+    shadows: Array(25).fill('none'),
     typography: {
         useNextVariants: true,
         h1: {
@@ -171,9 +168,10 @@ export default createMuiTheme({
         },
 
         MuiFormHelperText: {
-            error: {
-                color: '#FF7E7E !important',
-                // marginBottom: '.8vh'
+            "root": {
+                "&$error": {
+                    "color": "#FF7E7E !important"
+                }
             }
         },
         MuiPickersModal: {

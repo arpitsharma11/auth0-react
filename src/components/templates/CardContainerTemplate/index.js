@@ -23,8 +23,8 @@ const IconContainerTemplate = (props) => {
             <Grid item xs={12}>
                 <Grid container
                     justify="center">
-                    {serviceList && serviceList.map(value => (
-                        <Grid style={{paddingRight : '2.9%',paddingBottom: '1.9%'}} key={value} item>
+                    {serviceList && serviceList.map((value, index) => (
+                        <Grid style={{ paddingRight: '2.9%', paddingBottom: '1.9%' }} key={index} item>
                             <Cards title={value.title} src={value.icon} background={value.background} />
                         </Grid>
                     ))}
