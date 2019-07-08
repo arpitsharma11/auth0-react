@@ -14,6 +14,7 @@ import Signup from '../pages/Signup';
 import HeaderFooterView from '../components/HeaderFooterView';
 import ServicesDashboard from '../pages/ServicesDashboard';
 import store from '../store';
+import Test from '../pages/Test'
 // import { createHttpLink } from "apollo-link-http";
 // import { setContext } from 'apollo-link-context'
 
@@ -68,6 +69,7 @@ function App() {
 					<Route exact path="/" component={AuthGaurd(LandingPage)} />
 					{/* <HeaderFooterView> */}
 					<Route exact path="/services" component={ServicesDashboard} />
+					<Route exact path="/dashboard" component={Test} />
 					{/* </HeaderFooterView> */}
 				</Router>
 			</ApolloProvider>

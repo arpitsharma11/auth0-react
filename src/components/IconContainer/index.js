@@ -10,6 +10,7 @@ const styles = theme => ({
     caption: {
         width: 45,
         height: 34,
+        paddingTop: '9px',
         color: '#000000',
         fontWeight: 500,
         textAlign: 'center',
