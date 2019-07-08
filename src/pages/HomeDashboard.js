@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import {compose} from 'redux';
+import { compose } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
@@ -105,8 +105,8 @@ class HomeDashboard extends Component {
                 <div className={classes.root} >
                     {newUser ?
                         <React.Fragment>
-                            <Typography className={classes.heading} > Hi { auth.getName() } </Typography>
-                            <Typography className={classes.helper} > Here are the services you can use" </Typography>
+                            <Typography className={classes.heading} > Hi  </Typography>
+                            <Typography className={classes.helper} > Here are the services you can use</Typography>
                         </React.Fragment> :
                         <Typography className={classes.heading} style={newUser ? null : { marginBottom: '41px' }} > Recently used services </Typography>
                     }
@@ -148,4 +148,4 @@ function mapStateToProps(state) {
     return {}
 }
 
-export default compose(withStyles(styles, { withTheme: true }),connect(mapStateToProps,actions))(HomeDashboard);
+export default compose(withStyles(styles, { withTheme: true }), connect(mapStateToProps, actions))(HomeDashboard);
