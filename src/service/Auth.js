@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from '../../config/auth0_variables';
+import axios from 'axios';
 
 class AuthService extends Component {
 
@@ -54,7 +55,7 @@ class AuthService extends Component {
                 username: email,
                 password: password,
                 grant_type: 'password',
-                audience: AUTH_CONFIG.audience,
+                //audience: AUTH_CONFIG.audience,
                 scope: AUTH_CONFIG.scope,
                 //prompt: 'none'
             }, (err,result) => {
@@ -71,8 +72,14 @@ class AuthService extends Component {
         this.auth0.parseHash( (err, authResult) =>  {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('name',authResult.idTokenPayload.name );
                 this.setSessionData(authResult);
+                const auth0Manage = new auth0.Management({
+                    domain: AUTH_CONFIG.domain,
+                    token: authResult.idToken,
+                });
+                const a = authResult.idTokenPayload['https://mpower.userinfo.com/usermetadata'];
+                
+                localStorage.setItem('name',a.firstName );
                 //alert('kk');
                 window.location.replace('/home');
                 //resolve();
