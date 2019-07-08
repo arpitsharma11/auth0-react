@@ -17,7 +17,6 @@ const styles = theme => ({
         letterSpacing: 0.62,
         fontFamily: 'Roboto'
     }
-
 });
 
 const defaultProps = {
@@ -52,7 +51,7 @@ const IconContainer = (props) => {
                 <img className={classes.icon} src={bgImage} alt="yo" />
                 <img style={{
                     marginLeft: '-40px',
-                    marginTop: '5px'
+                    marginTop: '7px'
                 }} src={image} alt="" />
             </Badge>
             <Typography className={classes.caption}>{caption}</Typography>

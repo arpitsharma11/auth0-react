@@ -35,8 +35,7 @@ const styles = theme => ({
         textAlign: 'center'
     },
     referralText: {
-        alignSelf: 'flex-start',
-        marginLeft: '7%',
+        marginRight: '237px',
         paddingTop: '10px',
         paddingBottom: '10px',
         opacity: 0.56,
@@ -45,18 +44,17 @@ const styles = theme => ({
         fontSize: '13px',
         letterSpacing: '0.62px',
         lineHeight: '18px',
-        fontWeight: 600,
-        marginLeft: '41px'
+        fontWeight: 600
     },
-	dontHave: {
-		opacity: '0.34',
-		color: '#000000',
-		fontSize: '12px',
-		letterSpacing: '0.47px',
-		lineHeight: '16px',
-		textAlign: 'center',
-		paddingTop: '16px'
-	}
+    dontHave: {
+        opacity: '0.34',
+        color: '#000000',
+        fontSize: '12px',
+        letterSpacing: '0.47px',
+        lineHeight: '16px',
+        textAlign: 'center',
+        paddingTop: '16px'
+    }
 });
 
 const CREATE_USER = gql`
@@ -95,73 +93,73 @@ class Signup extends Component {
 
     firstNameValidation = () => {
         const { firstName } = this.state;
-		if( firstName === '' ){
-			this.setState({
+        if (firstName === '') {
+            this.setState({
                 firstNameError: true,
                 firstNameErrorMsg: 'First Name Required'
             })
-			return false
-		}
-		return true;
+            return false
+        }
+        return true;
     }
 
     emailValidation = () => {
         const { email } = this.state;
-		if( email === '' ){
-			this.setState({
+        if (email === '') {
+            this.setState({
                 emailError: true,
                 emailErrorMsg: 'Email Required'
             })
-			return false
-		}
-		const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-		if (reg.test(email) == false) {
-			this.setState({
+            return false
+        }
+        const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (reg.test(email) == false) {
+            this.setState({
                 emailError: true,
                 emailErrorMsg: 'Invalid email ID'
             })
-			return false;
-		}
-		return true;
-	}
+            return false;
+        }
+        return true;
+    }
 
     passwordValidation = () => {
         const { password } = this.state;
-		if( password === '' ){
-			this.setState({
+        if (password === '') {
+            this.setState({
                 passwordError: true,
                 passwordErrorMsg: 'Password Required'
             });
-			return false;
+            return false;
         }
-        if( password.length < 8 ){
+        if (password.length < 8) {
             this.setState({
                 passwordError: true,
                 passwordErrorMsg: 'Password lenght needs to be 8 or more than 8 characters.'
             });
             return false;
         }
-		return true;
+        return true;
     }
 
     rePasswordValidation = () => {
         const { rePassword } = this.state;
-		if( rePassword === '' ){
+        if (rePassword === '') {
             this.setState({
                 rePasswordError: true,
                 rePasswordErrorMsg: 'Repassword Required'
             });
-			return false;
+            return false;
         }
-        if( rePassword !== this.state.password ){
+        if (rePassword !== this.state.password) {
             this.setState({
                 rePasswordError: true,
                 rePasswordErrorMsg: 'Password does not match'
             });
             return false;
         }
-		return true;
-	}
+        return true;
+    }
 
     handleFieldChange = async (name, value) => {
         await this.setState({
@@ -174,13 +172,13 @@ class Signup extends Component {
 
     validation = () => {
         let error = true;
-        if( !this.firstNameValidation() )
+        if (!this.firstNameValidation())
             error = false;
-        if( !this.emailValidation() )
+        if (!this.emailValidation())
             error = false;
-        if( !this.passwordValidation() )
+        if (!this.passwordValidation())
             error = false;
-        if( !this.rePasswordValidation() )
+        if (!this.rePasswordValidation())
             error = false;
         return error
     }
@@ -247,17 +245,17 @@ class Signup extends Component {
             <MuiThemeProvider theme={theme}>
                 <PageTemplate>
                     <Logo />
-                    <Typography 
-                        variant="subtitle1" 
+                    <Typography
+                        variant="subtitle1"
                         className={classes.heading}
                     >
                         Get Mpowered with us.
                         <span className={classes.signUpTitle}> Sign Up Now.</span>
                     </Typography>
-                    { userError && 
-                        <Typography 
-                            style={{ color: 'red' }} 
-                            variant="body1" 
+                    {userError &&
+                        <Typography
+                            style={{ color: 'red' }}
+                            variant="body1"
                         >
                             User already exists
                         </Typography>
@@ -265,7 +263,7 @@ class Signup extends Component {
                     <TextField
                         name="firstName"
                         error={firstNameError}
-                        errorMsg={ firstNameErrorMsg }
+                        errorMsg={firstNameErrorMsg}
                         textFieldClass={classes.largeTextField}
                         label="First Name"
                         onFieldChange={this.handleFieldChange}
@@ -278,12 +276,12 @@ class Signup extends Component {
                         type="text"
                         label="Last Name"
                         onFieldChange={this.handleFieldChange}
-                        //onBlur={this.passwordValidation} />
-                        />
+                    //onBlur={this.passwordValidation} />
+                    />
                     <TextField
                         name="email"
                         error={emailError}
-                        errorMsg={ emailErrorMsg }
+                        errorMsg={emailErrorMsg}
                         textFieldClass={classes.largeTextField}
                         label="Email Id or phone number"
                         onFieldChange={this.handleFieldChange}
@@ -291,7 +289,7 @@ class Signup extends Component {
                     <TextField
                         name="password"
                         error={passwordError}
-                        errorMsg={ passwordErrorMsg }
+                        errorMsg={passwordErrorMsg}
                         textFieldClass={classes.largeTextField}
                         type={showPassword ? 'text' : 'password'}
                         label="Password"
@@ -303,7 +301,7 @@ class Signup extends Component {
                     <TextField
                         name="rePassword"
                         error={rePasswordError}
-                        errorMsg={ rePasswordErrorMsg }
+                        errorMsg={rePasswordErrorMsg}
                         textFieldClass={classes.largeTextField}
                         type={showPasswordRe ? 'text' : 'password'}
                         label="Confirm password"
@@ -312,41 +310,41 @@ class Signup extends Component {
 						onShowPassword={ () => this.showPassword( 'Re' ) }
 						showPassword={true}
                     />
-                     {/* <Typography variant="body1" className={classes.referralText}>
+                     <Typography variant="body1" className={classes.referralText}>
                                         Referral Code
                               </Typography>
                     <TextField textFieldClass={classes.largeTextField} label="Enter Code" onFieldChange={this.handleFieldChange} />
-                                    <Button variant="text" title="Apply" color="secondary"
-                                        style={{
-                                            marginTop: '-47px',
-                                            marginLeft: '66%'
+                    <Button variant="text" title="Apply" color="secondary"
+                        style={{
+                            marginTop: '-47px',
+                            marginLeft: '268px'
 
-                                        }} /> */}
-                    <Typography 
-                        variant="body1" 
+                        }} />
+                    <Typography
+                        variant="body1"
                         className={classes.agreementText}
                     >
                         By tapping Sign Up you agree on our Terms of Service and Privacy Policy
                     </Typography>
                     <Button
-                        onClick = { () => this.singUpCall() }
-                        title="Sign Up" 
-                        color='primary' 
-                        variant='contained' 
-                        rootClass={classes.button} 
-                        size="large" 
+                        onClick={() => this.singUpCall()}
+                        title="Sign Up"
+                        color='primary'
+                        variant='contained'
+                        rootClass={classes.button}
+                        size="large"
                     />
-                    <Typography 
-                        className={classes.dontHave} 
-                        variant="body1" 
+                    <Typography
+                        className={classes.dontHave}
+                        variant="body1"
                     >
-                        Already have a account? 
-                        <span 
-                            style={{ color: '#F7B500'  }}
-                            onClick= { () => this.props.history.push('/login') }
+                        Already have a account?
+                        <span
+                            style={{ color: '#F7B500' }}
+                            onClick={() => this.props.history.push('/login')}
                         >
                             Login
-                        </span> 
+                        </span>
                     </Typography>
                 </PageTemplate>
             </MuiThemeProvider>

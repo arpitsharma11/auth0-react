@@ -28,13 +28,12 @@ const styles = theme => ({
 });
 
 function validateEmail(email) {
-    const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    if (reg.test(email) == false) 
-    {
-        console.log('Invalid Email Address');
-        return false;
-    }
-    return true;
+	const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if (reg.test(email) == false) {
+		console.log('Invalid Email Address');
+		return false;
+	}
+	return true;
 }
 
 class Login extends Component {
@@ -55,7 +54,7 @@ class Login extends Component {
 
 	componentWillMount() {
 		console.log(window.location.pathname);
-		if( window.location.pathname === '/callback' ){
+		if (window.location.pathname === '/callback') {
 			this.props.auth.setSession();
 			this.setState({
 				loading: true
@@ -74,18 +73,18 @@ class Login extends Component {
 
 	emailValidation = () => {
 		const { email } = this.state;
-		if( email === '' ){
-			this.setState({ 
+		if (email === '') {
+			this.setState({
 				emailError: true,
-				emailErrorMsg: 'Email Required' 
+				emailErrorMsg: 'Email Required'
 			});
 			return false
 		}
 		const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 		if (reg.test(email) == false) {
-			this.setState({ 
+			this.setState({
 				emailError: true,
-				emailErrorMsg: 'Invalid email' 
+				emailErrorMsg: 'Invalid email'
 			})
 			return false;
 		}
@@ -94,10 +93,10 @@ class Login extends Component {
 
 	passwordValidation = () => {
 		const { password } = this.state;
-		if( password === '' ){
-			this.setState({ 
+		if (password === '') {
+			this.setState({
 				passwordError: true,
-				passwordErrorMsg: 'Password Required' 
+				passwordErrorMsg: 'Password Required'
 			});
 			return false;
 		}
@@ -107,20 +106,20 @@ class Login extends Component {
 	onLoginClick = async () => {
 		const { email, password } = this.state;
 		let error = true;
-        if( !this.emailValidation() )
-            error = false;
-        if( !this.passwordValidation() )
-            error = false;
+		if (!this.emailValidation())
+			error = false;
+		if (!this.passwordValidation())
+			error = false;
 
-		if( error )
+		if (error)
 			this.props.auth.login(email, password).then(res => {
-					console.log(res);
-				}).catch(err => {
-					console.log(err);
-					this.setState({
-						error: err.description
-					})
+				console.log(res);
+			}).catch(err => {
+				console.log(err);
+				this.setState({
+					error: err.description
 				})
+			})
 	}
 
 	showPassword = () => {
@@ -131,89 +130,89 @@ class Login extends Component {
 
 	render() {
 		const { classes, auth } = this.props;
-		const { 
-				emailError, 
-				passwordError, 
-				error, 
-				emailErrorMsg, 
-				passwordErrorMsg, 
-				loading,
-				showPassword
-			} = this.state;
+		const {
+			emailError,
+			passwordError,
+			error,
+			emailErrorMsg,
+			passwordErrorMsg,
+			loading,
+			showPassword
+		} = this.state;
 
 		return (
 			<MuiThemeProvider theme={theme}>
 				<PageTemplate>
 					<Logo />
-					<Typography 
-						variant="subtitle1" 
+					<Typography
+						variant="subtitle1"
 						style={{ paddingTop: 41 }}
 					>
 						Welcome Back!
 					</Typography>
-					<Typography 
-						variant="subtitle2" 
+					<Typography
+						variant="subtitle2"
 						style={{ paddingBottom: 35 }}
 					>
 						Please Log In to continue
 					</Typography>
-					{	error && 
-						<Typography 
-							style={{ color: 'red' }} 
-							variant="body1" 
+					{error &&
+						<Typography
+							style={{ color: 'red' }}
+							variant="body1"
 						>
-							{ error }
+							{error}
 						</Typography>}
-					<TextField 	
+					<TextField
 						//onFocus={this.handleFocus}
-						onBlur={this.emailValidation} 
-						textFieldClass={classes.largeTextField} 
-						name="email" label="Email Id or phone number" 
-						error={emailError} 
-						errorMsg={emailErrorMsg} 
+						onBlur={this.emailValidation}
+						textFieldClass={classes.largeTextField}
+						name="email" label="Email Id or phone number"
+						error={emailError}
+						errorMsg={emailErrorMsg}
 						onFieldChange={this.handleFieldChange} />
-					<TextField 
+					<TextField
 						onBlur={this.passwordValidation}
-						textFieldClass={classes.largeTextField} 
-						name="password" 
-						type={showPassword ? 'text' : 'password'} 
-						label="Password" 
-						error={passwordError} 
-						errorMsg={passwordErrorMsg}  
+						textFieldClass={classes.largeTextField}
+						name="password"
+						type={showPassword ? 'text' : 'password'}
+						label="Password"
+						error={passwordError}
+						errorMsg={passwordErrorMsg}
 						onFieldChange={this.handleFieldChange}
-						onShowPassword={ this.showPassword }
+						onShowPassword={this.showPassword}
 						showPassword={true}
 					/>
-					<Typography 
-						variant="body1" 
+					<Typography
+						variant="body1"
 						style={{ paddingTop: 10, paddingBottom: 22 }}
 					>
 						Forgot Password?
 					</Typography>
-					{ loading ? 
+					{loading ?
 						<div>
 							Loading
-						</div>:
-						<Button 
-							onClick={() => this.onLoginClick()} 
-							title="Log In" 
-							color='primary' 
-							variant='contained' 
-							rootClass={classes.button} 
-							size="large" 
+						</div> :
+						<Button
+							onClick={() => this.onLoginClick()}
+							title="Log In"
+							color='primary'
+							variant='contained'
+							rootClass={classes.button}
+							size="large"
 						/>
 					}
-					<Typography 
-						className={classes.dontHave} 
-						variant="body1" 
+					<Typography
+						className={classes.dontHave}
+						variant="body1"
 					>
-						Don’t have an account? 
-						<span 
-							style={{ color: '#F7B500'  }} 
-                            onClick= { () => this.props.history.push('/signup') }
-						>	
+						Don’t have an account?
+						<span
+							style={{ color: '#F7B500' }}
+							onClick={() => this.props.history.push('/signup')}
+						>
 							Sign up
-						</span> 
+						</span>
 					</Typography>
 				</PageTemplate>
 			</MuiThemeProvider>

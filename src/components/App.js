@@ -60,7 +60,7 @@ function App() {
 		<Provider store={store} >
 			<ApolloProvider client={client}>
 				<Router>
-					<Route exact path="/home" component={AuthGaurd(HomeDashboard)} />
+					<Route exact path="/home" component={(HomeDashboard)} />
 					<Route exact path="/login" component={AuthGaurd(Login)} />
 					<Route exact path="/logout" component={AuthGaurd(Logout)} />
 					<Route exact path="/signup" component={AuthGaurd(Signup)} />

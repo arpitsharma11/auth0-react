@@ -71,6 +71,7 @@ class AuthService extends Component {
         this.auth0.parseHash( (err, authResult) =>  {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('name',authResult.idTokenPayload.name );
                 this.setSessionData(authResult);
                 //alert('kk');
                 window.location.replace('/home');
@@ -104,6 +105,7 @@ class AuthService extends Component {
             scope: AUTH_CONFIG.scope,
         }, (err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
+                console.log('hi');
                 this.setSessionData(authResult);
             } else if (err) {
                 this.logout();

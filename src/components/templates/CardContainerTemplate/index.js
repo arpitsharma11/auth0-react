@@ -11,6 +11,7 @@ const styles = theme => ({
 
     root: {
         flexGrow: 1,
+        justifyContent: 'center'
     }
 });
 
@@ -20,14 +21,17 @@ const IconContainerTemplate = (props) => {
     const { classes, children } = props;
     return (
         <Grid container
-                    className={classes.root}
-                    >
-                    {serviceList && serviceList.map(value => (
-                        <Grid style={{width: '43.7%', marginRight:'2.9%',marginTop:'1.9%'}} key={value} item>
-                            <Cards title={value.title} src={value.icon} background={value.background} />
-                        </Grid>
-                    ))}
+            className={classes.root}
+        >
+            {serviceList && serviceList.map((value, index) => (
+                <Grid style={{ width: '43.7%', marginRight: '2.9%', marginTop: '1.9%' }} key={index} item>
+                    <Cards title={value.title} src={value.icon} background={value.background} />
                 </Grid>
+            ))}
+        </Grid>
+
+
+
     )
 }
 
