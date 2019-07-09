@@ -187,7 +187,7 @@ class Signup extends Component {
         //console.log('post call');
         const { email, password, firstName, lastName } = this.state;
         if( this.validation() ){
-            axios.post('http://54.70.201.62:8080/user/signup/',{
+            axios.post('http://localhost:8080/user/signup/',{
                 "firstName": firstName,
                 "lastName": lastName,
                 "email": email,
@@ -198,7 +198,10 @@ class Signup extends Component {
                 this.login(email,password);
             })
             .catch((error) => {
-                console.log(error);
+                this.setState({
+                    emailError: true,
+                    emailErrorMsg: error.response.data.message.split(':')[1]
+                })
             })
         }
     }
@@ -270,13 +273,13 @@ class Signup extends Component {
                     />
                     <TextField
                         name="lastName"
-                        //error={passwordError}
-                        //errorMsg={ passwordErrorMsg }
+                        error={lastNameError}
+                        errorMsg={ lastNameErrorMsg }
                         textFieldClass={classes.largeTextField}
                         type="text"
                         label="Last Name"
                         onFieldChange={this.handleFieldChange}
-                    //onBlur={this.passwordValidation} />
+                        //onBlur={this.passwordValidation} 
                     />
                     <TextField
                         name="email"
@@ -285,7 +288,8 @@ class Signup extends Component {
                         textFieldClass={classes.largeTextField}
                         label="Email Id or phone number"
                         onFieldChange={this.handleFieldChange}
-                        onBlur={this.emailValidation} />
+                        onBlur={this.emailValidation} 
+                    />
                     <TextField
                         name="password"
                         error={passwordError}
@@ -310,16 +314,27 @@ class Signup extends Component {
 						onShowPassword={ () => this.showPassword( 'Re' ) }
 						showPassword={true}
                     />
-                     <Typography variant="body1" className={classes.referralText}>
-                                        Referral Code
-                              </Typography>
-                    <TextField textFieldClass={classes.largeTextField} label="Enter Code" onFieldChange={this.handleFieldChange} />
-                    <Button variant="text" title="Apply" color="secondary"
+                    <Typography 
+                        variant="body1" 
+                        className={classes.referralText}
+                    >
+                        Referral Code
+                    </Typography>
+                    <TextField 
+                        textFieldClass={classes.largeTextField} 
+                        label="Enter Code" 
+                        onFieldChange={this.handleFieldChange} 
+                    />
+                    <Button 
+                        variant="text" 
+                        title="Apply" 
+                        color="secondary"
                         style={{
                             marginTop: '-47px',
                             marginLeft: '268px'
 
-                        }} />
+                        }} 
+                    />
                     <Typography
                         variant="body1"
                         className={classes.agreementText}
